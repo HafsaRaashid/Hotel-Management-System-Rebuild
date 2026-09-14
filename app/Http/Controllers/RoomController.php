@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Booking;
 use App\Models\Room;
 use App\Models\RoomCategory;
 use Illuminate\Http\RedirectResponse;
@@ -48,6 +49,30 @@ class RoomController extends Controller
     public function update(Request $request, Room $room): RedirectResponse
     {
         $room->update($this->validated($request));
+
+        return redirect()->route('rooms.index');
+    }
+
+    /**
+     * BL-004. CQ-021: the legacy delete_room.php handler was a silent no-op
+     * (bind_param defect) - this must actually delete. CQ-024: reject
+     * deleting a room still referenced by an active (status 0=booked or
+     * 1=checked_in, per that decision's own "not checked-out/cancelled"
+     * wording) booking - checked via the room_id FK, not name-text.
+     */
+    public function destroy(Room $room): RedirectResponse
+    {
+        $hasActiveBooking = Booking::where('room_id', $room->id)
+            ->whereIn('status', [Booking::STATUS_BOOKED, Booking::STATUS_CHECKED_IN])
+            ->exists();
+
+        if ($hasActiveBooking) {
+            return redirect()
+                ->route('rooms.index')
+                ->with('error', 'This room is referenced by an active booking and cannot be deleted.');
+        }
+
+        $room->delete();
 
         return redirect()->route('rooms.index');
     }

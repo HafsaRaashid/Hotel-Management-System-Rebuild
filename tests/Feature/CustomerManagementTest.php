@@ -2,7 +2,10 @@
 
 namespace Tests\Feature;
 
+use App\Models\Booking;
 use App\Models\Customer;
+use App\Models\Room;
+use App\Models\RoomCategory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -128,7 +131,16 @@ class CustomerManagementTest extends TestCase
         $this->assertSame($originalCustomerId, $customer->customer_id);
     }
 
-    public function test_delete_removes_customer(): void
+    /**
+     * AC-4 (.specclaw/changes/006-delete-referential-integrity/spec.md) -
+     * regression check: deleting a customer with no active-booking
+     * reference still works (CQ-021). The old test_controller_source_
+     * contains_no_booking_reference guard from change 002 is gone - it
+     * proved BL-008's CQ-024 deferral was a genuine absence; now that the
+     * deferral is over (this change closes it), a Booking reference is
+     * correct and expected, not a defect to guard against.
+     */
+    public function test_delete_removes_unreferenced_customer(): void
     {
         $customer = $this->makeCustomer();
 
@@ -138,27 +150,46 @@ class CustomerManagementTest extends TestCase
         $this->assertDatabaseMissing('customers', ['id' => $customer->id]);
     }
 
-    public function test_controller_source_contains_no_booking_reference(): void
+    private function makeBookingFor(Customer $customer, int $status): Booking
     {
-        // Strip comments first: this checks actual CODE has no Booking
-        // construct (class reference, table name, query) - not that the
-        // English word never appears in a docblock explaining the deferral.
-        $source = file_get_contents(app_path('Http/Controllers/CustomerController.php'));
-        $codeOnly = '';
+        $category = RoomCategory::first();
+        $room = Room::create(['room' => 'Single_101', 'category_id' => $category->id, 'status' => 0]);
 
-        foreach (token_get_all($source) as $token) {
-            if (is_array($token) && in_array($token[0], [T_COMMENT, T_DOC_COMMENT], true)) {
-                continue;
-            }
+        return Booking::create([
+            'ref_no' => Booking::generateUniqueRefNo(),
+            'customer_id' => $customer->id,
+            'name' => $customer->name,
+            'mail' => $customer->mail,
+            'phone' => $customer->phone,
+            'category_id' => $category->id,
+            'room_id' => $room->id,
+            'adult' => 1,
+            'children' => 0,
+            'datein' => '2026-10-01',
+            'dateout' => '2026-10-03',
+            'days_of_stay' => 2,
+            'status' => $status,
+        ]);
+    }
 
-            $codeOnly .= is_array($token) ? $token[1] : $token;
-        }
+    public function test_delete_rejects_customer_referenced_by_active_booking(): void
+    {
+        $customer = $this->makeCustomer();
+        $this->makeBookingFor($customer, Booking::STATUS_CHECKED_IN);
 
-        $this->assertStringNotContainsStringIgnoringCase(
-            'booking',
-            $codeOnly,
-            'CQ-024 is deferred (see spec.md Item Split) - the controller\'s actual code must not reference Booking/booking at all.'
-        );
+        $this->delete(route('customers.destroy', $customer))->assertRedirect(route('customers.index'));
+
+        $this->assertDatabaseHas('customers', ['id' => $customer->id]);
+    }
+
+    public function test_delete_allows_customer_referenced_only_by_checked_out_or_cancelled_booking(): void
+    {
+        $customer = $this->makeCustomer();
+        $this->makeBookingFor($customer, Booking::STATUS_CHECKED_OUT);
+
+        $this->delete(route('customers.destroy', $customer))->assertRedirect(route('customers.index'));
+
+        $this->assertDatabaseMissing('customers', ['id' => $customer->id]);
     }
 
     public function test_store_without_csrf_token_is_rejected_before_handler_runs(): void

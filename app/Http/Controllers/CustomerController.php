@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Booking;
 use App\Models\Customer;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -54,14 +55,28 @@ class CustomerController extends Controller
 
     /**
      * CQ-021: the legacy handler's delete was a silent no-op (bind_param
-     * defect) - this must actually delete. CQ-024's referential-integrity
-     * check against active bookings is explicitly deferred (see
-     * .specclaw/changes/002-customer-management/spec.md's Item Split) - no
-     * `booking`/`Booking` construct exists in this repo yet, and none is
-     * referenced here.
+     * defect) - this must actually delete. CQ-024: reject deleting a
+     * customer still referenced by an active (status 0=booked or
+     * 1=checked_in, per that decision's own "not checked-out/cancelled"
+     * wording) booking - checked via the customer_id FK, not phone. This
+     * check was deferred when this change first shipped (see
+     * .specclaw/changes/002-customer-management/spec.md's Item Split) until
+     * the `bookings` table existed; it now does (change
+     * 005-booking-stay-lifecycle), closed here in change
+     * 006-delete-referential-integrity.
      */
     public function destroy(Customer $customer): RedirectResponse
     {
+        $hasActiveBooking = Booking::where('customer_id', $customer->id)
+            ->whereIn('status', [Booking::STATUS_BOOKED, Booking::STATUS_CHECKED_IN])
+            ->exists();
+
+        if ($hasActiveBooking) {
+            return redirect()
+                ->route('customers.index')
+                ->with('error', 'This customer is referenced by an active booking and cannot be deleted.');
+        }
+
         $customer->delete();
 
         return redirect()->route('customers.index');
