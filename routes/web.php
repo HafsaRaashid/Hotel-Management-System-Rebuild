@@ -49,6 +49,8 @@ Route::delete('/bookings/pending/{booking}', [PendingBookingController::class, '
 Route::get('/bookings/pending/{booking}/convert', [PendingBookingController::class, 'showConvert'])->name('bookings.pending.convert.show');
 Route::post('/bookings/pending/{booking}/convert', [PendingBookingController::class, 'convert'])->name('bookings.pending.convert');
 Route::get('/stays', [StayController::class, 'index'])->name('stays.index');
+Route::get('/stays/{booking}/checkout', [StayController::class, 'showCheckout'])->name('stays.checkout.show');
+Route::post('/stays/{booking}/checkout', [StayController::class, 'checkout'])->name('stays.checkout');
 
 /*
 | MOD-005 - Customer Management (BL-006/BL-007/BL-008). No `/admin` prefix
