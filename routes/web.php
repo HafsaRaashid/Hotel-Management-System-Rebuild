@@ -63,9 +63,8 @@ Route::get('/stays/{booking}', [StayController::class, 'show'])->name('stays.sho
 Route::resource('customers', CustomerController::class)->except(['show']);
 
 /*
-| MOD-003 - Room & Rate Management (BL-002/BL-003/BL-005). No `destroy` on
-| rooms - BL-004 (Room Delete) is held out of this change; see
-| .specclaw/changes/003-room-rate-management/spec.md.
+| MOD-003 - Room & Rate Management (BL-002/BL-003/BL-005/BL-004). BL-004
+| (Room Delete) landed in change 006-delete-referential-integrity.
 */
 Route::resource('room-categories', RoomCategoryController::class);
-Route::resource('rooms', RoomController::class)->except(['show', 'destroy']);
+Route::resource('rooms', RoomController::class)->except(['show']);

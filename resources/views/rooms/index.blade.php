@@ -1,8 +1,7 @@
 {{--
-    BL-002 - Room List & Category Filter. Functional-only: no UI fidelity
-    work has been done (/specclaw:bf-ui has not run). No delete action -
-    BL-004 (Room Delete) is held out of this change; see
-    .specclaw/changes/003-room-rate-management/spec.md.
+    BL-002 - Room List & Category Filter. BL-004 (Room Delete) landed in
+    change 006-delete-referential-integrity. Functional-only: no UI fidelity
+    work has been done (/specclaw:bf-ui has not run).
 --}}
 @extends('layouts.app')
 
@@ -11,6 +10,10 @@
 @section('content')
     <main class="container py-5">
         <h1>Rooms</h1>
+
+        @if (session('error'))
+            <div class="alert alert-warning">{{ session('error') }}</div>
+        @endif
 
         <a href="{{ route('rooms.create') }}" class="btn btn-primary mb-3">Add Room</a>
 
@@ -44,6 +47,11 @@
                         <td>{{ $room->status === 0 ? 'Available' : 'Unavailable' }}</td>
                         <td>
                             <a href="{{ route('rooms.edit', $room) }}" class="btn btn-sm btn-secondary">Edit</a>
+                            <form action="{{ route('rooms.destroy', $room) }}" method="POST" class="d-inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach
