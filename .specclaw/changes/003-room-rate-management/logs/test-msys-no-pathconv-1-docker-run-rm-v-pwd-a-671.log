@@ -1,0 +1,46 @@
+
+   PASS  Tests\Unit\ExampleTest
+  ✓ that true is true                                                    0.22s  
+
+   PASS  Tests\Feature\CsrfProtectionTest
+  ✓ post without token is rejected before handler runs                  11.84s  
+  ✓ post with invalid token is rejected before handler runs              0.78s  
+  ✓ post with valid token reaches handler                                0.46s  
+
+   PASS  Tests\Feature\CustomerManagementTest
+  ✓ list shows all customer fields                                       5.83s  
+  ✓ create assigns unique customer ids across many creates               1.76s  
+  ✓ create skips insert when phone already exists                        0.36s  
+  ✓ create rejects invalid phone format                                  0.46s  
+  ✓ create accepts valid phone                                           0.26s  
+  ✓ edit updates fields without changing customer id                     0.33s  
+  ✓ delete removes customer                                              0.33s  
+  ✓ controller source contains no booking reference                      0.39s  
+  ✓ store without csrf token is rejected before handler runs             0.34s  
+  ✓ destroy without csrf token is rejected before handler runs           0.40s  
+
+   PASS  Tests\Feature\HealthCheckTest
+  ✓ the health check endpoint answers                                    0.40s  
+  ✓ the shell route renders                                              0.39s  
+
+   PASS  Tests\Feature\RoomCategoryManagementTest
+  ✓ migration seeds exactly the three legacy categories                  0.29s  
+  ✓ create persists name and price                                       0.37s  
+  ✓ edit updates name and price                                          0.34s  
+  ✓ delete removes category                                              0.29s  
+  ✓ store without csrf token is rejected                                 0.76s  
+  ✓ update without csrf token is rejected                                0.37s  
+  ✓ destroy without csrf token is rejected                               0.35s  
+
+   PASS  Tests\Feature\RoomManagementTest
+  ✓ list shows room category and status                                  0.45s  
+  ✓ list filters by category                                             0.35s  
+  ✓ create persists room category and status                             0.30s  
+  ✓ create rejects nonexistent category id                               0.33s  
+  ✓ edit updates room category and status                                0.34s  
+  ✓ store without csrf token is rejected                                 0.35s  
+  ✓ update without csrf token is rejected                                0.37s  
+
+  Tests:    30 passed (384 assertions)
+  Duration: 33.70s
+
