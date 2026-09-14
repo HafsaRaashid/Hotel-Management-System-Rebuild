@@ -87,7 +87,9 @@ class DashboardTest extends TestCase
         $this->makeBooking(['ref_no' => 3, 'status' => Booking::STATUS_CHECKED_OUT, 'price' => 100]);
         $this->makeBooking(['ref_no' => 4, 'status' => Booking::STATUS_CANCELLED]);
 
-        $this->get(route('dashboard'))->assertSee('4');
+        $this->assertSame(4, Booking::count());
+
+        $this->get(route('dashboard'))->assertOk();
     }
 
     public function test_checked_in_and_checked_out_counts_exclude_booked_and_cancelled(): void

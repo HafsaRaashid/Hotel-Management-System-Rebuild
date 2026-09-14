@@ -23,7 +23,7 @@ class DashboardController extends Controller
             'totalBookings' => Booking::count(),
             'checkedIn' => Booking::where('status', Booking::STATUS_CHECKED_IN)->count(),
             'checkedOut' => Booking::where('status', Booking::STATUS_CHECKED_OUT)->count(),
-            'totalPayment' => Booking::where('status', Booking::STATUS_CHECKED_OUT)->sum('price') ?? 0,
+            'totalPayment' => Booking::where('status', Booking::STATUS_CHECKED_OUT)->sum('price'),
             'availableRooms' => Room::where('status', 0)->count(),
             'totalRooms' => Room::count(),
             'totalRoomCategories' => RoomCategory::count(),
