@@ -1,7 +1,7 @@
 # 🦞 SpecClaw Dashboard
 
 **Project:** Hotel Management System Rebuild
-**Last Updated:** 2026-09-14 09:55 UTC
+**Last Updated:** 2026-09-14 10:06 UTC
 
 ## Active Changes
 
@@ -13,6 +13,7 @@
 - 🔍 **005-booking-stay-lifecycle** — verify PASS | 16/16 tasks (100%) | 0 failed
 - 🔍 **006-delete-referential-integrity** — verify PASS | 5/5 tasks (100%) | 0 failed
 - 🔍 **007-admin-authentication** — verify PASS | 5/5 tasks (100%) | 0 failed
+- 🔨 **008-dashboard-reporting** — build failed | 2/2 tasks (100%) | 0 failed
 
 ## Pending Proposals
 
@@ -24,6 +25,6 @@ _None._
 
 ## Stats
 
-- **Total changes:** 7
-- **Active:** 7
+- **Total changes:** 8
+- **Active:** 8
 - **Completed:** 0
