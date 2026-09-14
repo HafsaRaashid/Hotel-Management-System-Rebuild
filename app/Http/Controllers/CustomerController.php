@@ -53,6 +53,21 @@ class CustomerController extends Controller
     }
 
     /**
+     * CQ-021: the legacy handler's delete was a silent no-op (bind_param
+     * defect) - this must actually delete. CQ-024's referential-integrity
+     * check against active bookings is explicitly deferred (see
+     * .specclaw/changes/002-customer-management/spec.md's Item Split) - no
+     * `booking`/`Booking` construct exists in this repo yet, and none is
+     * referenced here.
+     */
+    public function destroy(Customer $customer): RedirectResponse
+    {
+        $customer->delete();
+
+        return redirect()->route('customers.index');
+    }
+
+    /**
      * DR-005's phone-dedup check applies only to create (store), not update -
      * the rule is about creating a new record, not editing an existing one.
      */
