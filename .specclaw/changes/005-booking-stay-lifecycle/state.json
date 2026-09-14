@@ -1,0 +1,12 @@
+{
+  "change": "005-booking-stay-lifecycle",
+  "phase": "build",
+  "branch": "specclaw/005-booking-stay-lifecycle",
+  "phases": {
+    "proposal": {"status":"approved","at":"2026-09-14T07:55:00Z"},
+    "spec": {"status":"done","at":"2026-09-14T07:55:55Z"},
+    "design": {"status":"done","at":"2026-09-14T07:56:38Z"},
+    "tasks": {"status":"done","at":"2026-09-14T08:52:16Z"},
+    "build": {"status":"failed","at":"2026-09-14T09:07:48Z","tasks":{"done":16,"total":16,"failed":0}}
+  }
+}

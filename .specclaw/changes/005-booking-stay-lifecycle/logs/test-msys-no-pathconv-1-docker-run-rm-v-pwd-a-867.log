@@ -1,0 +1,87 @@
+
+   PASS  Tests\Unit\ExampleTest
+  ✓ that true is true                                                    0.12s  
+
+   PASS  Tests\Feature\BookingIntakeTest
+  ✓ submitting creates booking with unique ref no                        7.60s  
+  ✓ new phone creates a customer and links it                            0.24s  
+  ✓ existing phone reuses customer without duplicating                   0.27s  
+  ✓ nonexistent category id is rejected                                  0.25s  
+  ✓ store without csrf token is rejected                                 0.61s  
+
+   PASS  Tests\Feature\CsrfProtectionTest
+  ✓ post without token is rejected before handler runs                   0.20s  
+  ✓ post with invalid token is rejected before handler runs              0.19s  
+  ✓ post with valid token reaches handler                                0.17s  
+
+   PASS  Tests\Feature\CustomerManagementTest
+  ✓ list shows all customer fields                                       0.29s  
+  ✓ create assigns unique customer ids across many creates               0.48s  
+  ✓ create skips insert when phone already exists                        0.16s  
+  ✓ create rejects invalid phone format                                  0.21s  
+  ✓ create accepts valid phone                                           0.26s  
+  ✓ edit updates fields without changing customer id                     0.30s  
+  ✓ delete removes customer                                              0.29s  
+  ✓ controller source contains no booking reference                      0.24s  
+  ✓ store without csrf token is rejected before handler runs             0.34s  
+  ✓ destroy without csrf token is rejected before handler runs           0.24s  
+
+   PASS  Tests\Feature\HealthCheckTest
+  ✓ the health check endpoint answers                                    0.21s  
+
+   PASS  Tests\Feature\MarketingSiteTest
+  ✓ home page shows live category pricing                                0.30s  
+  ✓ room details page shows live category pricing                        0.30s  
+  ✓ home page reflects a price change                                    0.33s  
+  ✓ services page answers                                                0.24s  
+  ✓ food page answers                                                    0.21s  
+  ✓ all four pages show the nav links                                    0.32s  
+  ✓ book now link resolves to the booking form                           0.23s  
+
+   PASS  Tests\Feature\PendingBookingTest
+  ✓ pending list shows only status zero bookings                         0.37s  
+  ✓ cancel sets status to cancelled without deleting                     0.17s  
+  ✓ convert assigns matching category available room                     0.22s  
+  ✓ convert rejects wrong category room                                  0.20s  
+  ✓ convert rejects unavailable room                                     0.26s  
+  ✓ cancel without csrf token is rejected                                0.30s  
+  ✓ convert without csrf token is rejected                               0.22s  
+
+   PASS  Tests\Feature\RoomCategoryManagementTest
+  ✓ migration seeds exactly the three legacy categories                  0.16s  
+  ✓ create persists name and price                                       0.15s  
+  ✓ edit updates name and price                                          0.15s  
+  ✓ delete removes category                                              0.13s  
+  ✓ store without csrf token is rejected                                 0.17s  
+  ✓ update without csrf token is rejected                                0.18s  
+  ✓ destroy without csrf token is rejected                               0.22s  
+
+   PASS  Tests\Feature\RoomManagementTest
+  ✓ list shows room category and status                                  0.20s  
+  ✓ list filters by category                                             0.18s  
+  ✓ create persists room category and status                             0.15s  
+  ✓ create rejects nonexistent category id                               0.18s  
+  ✓ edit updates room category and status                                0.15s  
+  ✓ store without csrf token is rejected                                 0.21s  
+  ✓ update without csrf token is rejected                                0.24s  
+
+   PASS  Tests\Feature\StayLifecycleTest
+  ✓ stay list shows only checked in and checked out                      0.24s  
+  ✓ checkout page computes days and amount due                           0.30s  
+  ✓ checkout rejects payment below amount due                            0.43s  
+  ✓ checkout succeeds and has all three effects                          0.23s  
+  ✓ edit date recomputes and persists days of stay                       0.28s  
+  ✓ view completed stay renders expected fields                          0.33s  
+  ✓ checkout without csrf token is rejected                              0.43s  
+  ✓ edit date without csrf token is rejected                             0.35s  
+  ✓ days of stay formula matches legacy                                  0.16s  
+
+   PASS  Tests\Feature\WalkInTest
+  ✓ available list shows only status zero rooms                          0.22s  
+  ✓ store creates checked in booking and occupies room                   0.16s  
+  ✓ store dedups customer by phone                                       0.16s  
+  ✓ store without csrf token is rejected                                 0.19s  
+
+  Tests:    61 passed (506 assertions)
+  Duration: 23.98s
+
