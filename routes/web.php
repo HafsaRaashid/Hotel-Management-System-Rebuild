@@ -41,6 +41,8 @@ Route::get('/food', [MarketingController::class, 'food'])->name('marketing.food'
 Route::get('/book', [BookingController::class, 'create'])->name('booking.create');
 Route::post('/book', [BookingController::class, 'store'])->name('booking.store');
 Route::get('/walk-in', [WalkInController::class, 'available'])->name('walk-in.available');
+Route::get('/walk-in/create', [WalkInController::class, 'create'])->name('walk-in.create');
+Route::post('/walk-in', [WalkInController::class, 'store'])->name('walk-in.store');
 Route::get('/bookings/pending', [PendingBookingController::class, 'index'])->name('bookings.pending');
 Route::delete('/bookings/pending/{booking}', [PendingBookingController::class, 'destroy'])->name('bookings.pending.destroy');
 
