@@ -6,6 +6,7 @@ use App\Http\Controllers\MarketingController;
 use App\Http\Controllers\PendingBookingController;
 use App\Http\Controllers\RoomCategoryController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\StayController;
 use App\Http\Controllers\WalkInController;
 use Illuminate\Support\Facades\Route;
 
@@ -47,6 +48,7 @@ Route::get('/bookings/pending', [PendingBookingController::class, 'index'])->nam
 Route::delete('/bookings/pending/{booking}', [PendingBookingController::class, 'destroy'])->name('bookings.pending.destroy');
 Route::get('/bookings/pending/{booking}/convert', [PendingBookingController::class, 'showConvert'])->name('bookings.pending.convert.show');
 Route::post('/bookings/pending/{booking}/convert', [PendingBookingController::class, 'convert'])->name('bookings.pending.convert');
+Route::get('/stays', [StayController::class, 'index'])->name('stays.index');
 
 /*
 | MOD-005 - Customer Management (BL-006/BL-007/BL-008). No `/admin` prefix
