@@ -1,13 +1,13 @@
 # 🦞 SpecClaw Dashboard
 
 **Project:** Hotel Management System Rebuild
-**Last Updated:** 2026-09-14 05:45 UTC
+**Last Updated:** 2026-09-14 05:57 UTC
 
 ## Active Changes
 
 
 - 🔍 **001-csrf-baseline** — verify PASS | 2/2 tasks (100%) | 0 failed
-- 📝 **002-customer-management** — tasks done | 0/6 tasks (0%) | 0 failed
+- 🔨 **002-customer-management** — build done | 6/6 tasks (100%) | 0 failed
 
 ## Pending Proposals
 
