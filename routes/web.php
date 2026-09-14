@@ -9,6 +9,7 @@ use App\Http\Controllers\PendingBookingController;
 use App\Http\Controllers\RoomCategoryController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\StayController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\WalkInController;
 use Illuminate\Support\Facades\Route;
 
@@ -84,4 +85,7 @@ Route::middleware('auth')->group(function () {
     // MOD-003 - Room & Rate Management (BL-002/BL-003/BL-005/BL-004).
     Route::resource('room-categories', RoomCategoryController::class);
     Route::resource('rooms', RoomController::class)->except(['show']);
+
+    // MOD-002 - User Account Management (BL-012/BL-013/BL-014).
+    Route::resource('users', UserController::class)->except(['show']);
 });
