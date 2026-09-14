@@ -5,6 +5,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\MarketingController;
 use App\Http\Controllers\RoomCategoryController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\WalkInController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,6 +39,7 @@ Route::get('/food', [MarketingController::class, 'food'])->name('marketing.food'
 */
 Route::get('/book', [BookingController::class, 'create'])->name('booking.create');
 Route::post('/book', [BookingController::class, 'store'])->name('booking.store');
+Route::get('/walk-in', [WalkInController::class, 'available'])->name('walk-in.available');
 
 /*
 | MOD-005 - Customer Management (BL-006/BL-007/BL-008). No `/admin` prefix
