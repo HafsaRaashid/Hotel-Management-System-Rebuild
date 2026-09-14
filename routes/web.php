@@ -3,6 +3,7 @@
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\MarketingController;
+use App\Http\Controllers\PendingBookingController;
 use App\Http\Controllers\RoomCategoryController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\WalkInController;
@@ -40,6 +41,8 @@ Route::get('/food', [MarketingController::class, 'food'])->name('marketing.food'
 Route::get('/book', [BookingController::class, 'create'])->name('booking.create');
 Route::post('/book', [BookingController::class, 'store'])->name('booking.store');
 Route::get('/walk-in', [WalkInController::class, 'available'])->name('walk-in.available');
+Route::get('/bookings/pending', [PendingBookingController::class, 'index'])->name('bookings.pending');
+Route::delete('/bookings/pending/{booking}', [PendingBookingController::class, 'destroy'])->name('bookings.pending.destroy');
 
 /*
 | MOD-005 - Customer Management (BL-006/BL-007/BL-008). No `/admin` prefix
