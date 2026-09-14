@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\MarketingController;
 use App\Http\Controllers\RoomCategoryController;
@@ -31,6 +32,12 @@ Route::get('/', [MarketingController::class, 'home'])->name('marketing.home');
 Route::get('/rooms-overview', [MarketingController::class, 'room'])->name('marketing.room');
 Route::get('/services', [MarketingController::class, 'services'])->name('marketing.services');
 Route::get('/food', [MarketingController::class, 'food'])->name('marketing.food');
+
+/*
+| MOD-004 - Booking & Stay Lifecycle (BL-015). Public reservation intake.
+*/
+Route::get('/book', [BookingController::class, 'create'])->name('booking.create');
+Route::post('/book', [BookingController::class, 'store'])->name('booking.store');
 
 /*
 | MOD-005 - Customer Management (BL-006/BL-007/BL-008). No `/admin` prefix

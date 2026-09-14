@@ -59,4 +59,13 @@ class Booking extends Model
 
         return $candidate;
     }
+
+    /**
+     * DR-009's exact legacy formula, adopted as-is: the whole-day difference
+     * between check-in and check-out dates.
+     */
+    public static function computeDaysOfStay(string $datein, string $dateout): int
+    {
+        return (int) floor(abs(strtotime($dateout) - strtotime($datein)) / 86400);
+    }
 }
