@@ -341,7 +341,7 @@ BUILT: change `003-room-rate-management`, verify-report.md verdict PASS 2026-09-
 **Verification:** NO BASELINE DATA — baseline has been run, but no scenario in scenarios.md cites this item's rules
 
 **Status notes (human-added):**
-NOT BUILT — held out of change `003-room-rate-management` deliberately (not an oversight): this item's own acceptance basis above requires shipping CQ-021's fix and CQ-024's check "together, not delete alone deferred," but CQ-024's check needs the `booking` table, which does not exist (MOD-004 unbuilt). Unlike BL-008 (Customer Delete), this item's wording rules out a partial/item-split build, so it was left for a future change once MOD-004 lands. See `.specclaw/changes/003-room-rate-management/spec.md`'s "Item Held Out" section.
+BUILT: change `006-delete-referential-integrity`, verify-report.md verdict PASS (7/7 acceptance criteria) 2026-09-14, merged to `main`. Shipped exactly as this item's acceptance basis required — CQ-021's delete fix and CQ-024's referential-integrity check together, in one change, once MOD-004's `bookings` table existed. Previously held out of change `003-room-rate-management`; see that change's spec.md "Item Held Out" section for the original reasoning.
 
 ## MOD-005 — Customer Management
 
@@ -404,8 +404,8 @@ BUILT: change `002-customer-management`, verify-report.md verdict PASS 2026-09-1
 **Verification:** NO BASELINE DATA — baseline has been run, but no scenario in scenarios.md cites this item's rules
 
 **Status notes (human-added):**
-BUILT: change `002-customer-management`, verify-report.md verdict PASS 2026-09-14, merged to `main`. Partial — see next line.
-⚠ PARTIALLY BUILT (recorded in prose, not via IS-### — see change `002-customer-management`'s spec.md for why): CQ-021's delete fix is implemented and built; CQ-024's referential-integrity check against `booking` is deferred — no `booking` table exists yet (MOD-004 unbuilt). Blocked until MOD-004 creates the `booking` table. `specclaw-bf-rebuild-collect split-append` could not be used because this item cites no `DR-###` rule to partition against.
+BUILT: change `002-customer-management` (CQ-021 delete fix, verify PASS 2026-09-14) + change `006-delete-referential-integrity` (CQ-024 referential-integrity check, closing the deferral below, verify PASS 2026-09-14), both merged to `main`. Fully built as of change 006.
+⚠ Historical record, now resolved: CQ-024's check was deferred when this item first shipped in change `002-customer-management` (recorded in prose, not via IS-###, since this item cites no `DR-###` rule for `split-append` to partition against — see that change's spec.md) because no `booking` table existed yet (MOD-004 unbuilt). Change `005-booking-stay-lifecycle` created it; change `006-delete-referential-integrity` closed the deferral — the check now queries `bookings.customer_id` (the CQ-011 FK), exactly as this item's own acceptance basis anticipated, not by phone.
 
 ## MOD-006 — Public Marketing Site
 
