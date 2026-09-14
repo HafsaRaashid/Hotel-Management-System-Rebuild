@@ -15,6 +15,11 @@ class Booking extends Model
 
     public const STATUS_CANCELLED = 3;
 
+    protected $casts = [
+        'datein' => 'date',
+        'dateout' => 'date',
+    ];
+
     protected $fillable = [
         'ref_no',
         'customer_id',
