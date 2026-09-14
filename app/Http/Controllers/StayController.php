@@ -66,4 +66,30 @@ class StayController extends Controller
 
         return redirect()->route('stays.index');
     }
+
+    /**
+     * BL-022.
+     */
+    public function edit(Booking $booking): View
+    {
+        return view('stays.edit', ['booking' => $booking]);
+    }
+
+    /**
+     * CQ-016: the legacy handler writes dateout alone and leaves
+     * days_of_stay stale - this must recompute and persist both together.
+     */
+    public function updateDate(Request $request, Booking $booking): RedirectResponse
+    {
+        $validated = $request->validate([
+            'dateout' => ['required', 'date', 'after_or_equal:'.$booking->datein],
+        ]);
+
+        $booking->update([
+            'dateout' => $validated['dateout'],
+            'days_of_stay' => Booking::computeDaysOfStay($booking->datein, $validated['dateout']),
+        ]);
+
+        return redirect()->route('stays.index');
+    }
 }
