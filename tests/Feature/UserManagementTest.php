@@ -93,13 +93,17 @@ class UserManagementTest extends TestCase
         $response = $this->get(route('users.edit', $user));
 
         $response->assertStatus(200);
+
         // DR-013: the legacy defect pre-filled the password input's value
-        // with the user's id (`value="<?php echo $get['id'] ?>"`) - assert
-        // that value attribute never appears, rather than checking for the
-        // id string anywhere on the page (it legitimately appears in the
-        // form's own action URL, e.g. /users/{id}).
-        $response->assertDontSee('value="'.$user->id.'"', false);
-        $response->assertDontSee($user->password, false);
+        // with the user's id (manage_user.php's password value expression
+        // read the id when isset($get['password'])). Assert the password
+        // input itself carries no value attribute at all - not a page-wide
+        // substring search for the id, since the id legitimately appears
+        // elsewhere on the page (the form's action URL, and the Type
+        // select's own option values).
+        preg_match('/<input[^>]*name="password"[^>]*>/', $response->getContent(), $matches);
+        $this->assertNotEmpty($matches, 'Expected the edit form to render a password input.');
+        $this->assertStringNotContainsString('value=', $matches[0], 'Password input must render blank, not pre-filled.');
     }
 
     public function test_update_with_blank_password_leaves_it_unchanged(): void
