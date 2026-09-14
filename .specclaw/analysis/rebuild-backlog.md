@@ -425,6 +425,9 @@ _Depends on: none. module dependency rank undefined — module-map.md describes 
 **Verification:** NO BASELINE DATA — baseline has been run, but no scenario in scenarios.md cites this item's rules
 **UI fidelity:** ⚠ UI GROUNDING MISSING — THEME-ONLY decided (SQ-013) but these artifacts are absent: .specclaw/ui/ui-inventory.md, .specclaw/ui/design-tokens.json, .specclaw/ui/screens/, .specclaw/ui/ui-manifest.json — run /specclaw:bf-ui
 
+**Status notes (human-added):**
+BUILT: change `004-public-marketing-site`, verify-report.md verdict PASS (6/6 acceptance criteria) 2026-09-14, merged to `main`. CQ-008 satisfied (live RoomCategory pricing, not hardcoded). "Book Now" nav link is a plain `/book` href (BL-015/MOD-004 not built yet) — 404s until that item lands, documented as intended. Functional-only (no UI fidelity — still gated above).
+
 ## MOD-004 — Booking & Stay Lifecycle
 
 _Depends on: MOD-003. module dependency rank undefined — module-map.md describes a dependency cycle. 10 active item(s)._
