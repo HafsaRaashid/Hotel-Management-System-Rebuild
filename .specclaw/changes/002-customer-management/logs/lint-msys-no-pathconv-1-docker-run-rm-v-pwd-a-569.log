@@ -1,0 +1,33 @@
+
+  ⨯⨯⨯⨯⨯⨯⨯⨯⨯⨯⨯⨯⨯⨯⨯⨯⨯⨯⨯⨯⨯⨯⨯.⨯⨯⨯⨯
+
+  ──────────────────────────────────────────────────────────────────── Laravel  
+    FAIL   ......................................... 28 files, 27 style issues  
+  ⨯ app/Http/Controllers/Controller.php                            line_ending  
+  ⨯ app/Http/Controllers/CustomerController.php                    line_ending  
+  ⨯ app/Models/Customer.php                                        line_ending  
+  ⨯ app/Providers/AppServiceProvider.php                           line_ending  
+  ⨯ bootstrap/app.php line_ending, unary_operator_spaces, not_operator_with_s…  
+  ⨯ bootstrap/providers.php fully_qualified_strict_types, line_ending, single…  
+  ⨯ config/app.php                                                 line_ending  
+  ⨯ config/auth.php fully_qualified_strict_types, line_ending, single_line_af…  
+  ⨯ config/cache.php                                               line_ending  
+  ⨯ config/database.php                                            line_ending  
+  ⨯ config/filesystems.php                                         line_ending  
+  ⨯ config/logging.php                          line_ending, no_unused_imports  
+  ⨯ config/mail.php                                                line_ending  
+  ⨯ config/queue.php                                               line_ending  
+  ⨯ config/services.php                                            line_ending  
+  ⨯ config/session.php                                             line_ending  
+  ⨯ database/migrations/0001_01_01_000001_create_cache_table.php class_defini…  
+  ⨯ database/migrations/0001_01_01_000002_create_jobs_table.php class_definit…  
+  ⨯ database/migrations/2026_09_14_000001_create_customers_table.php class_de…  
+  ⨯ database/seeders/DatabaseSeeder.php                            line_ending  
+  ⨯ public/index.php                            line_ending, no_unused_imports  
+  ⨯ routes/console.php                                             line_ending  
+  ⨯ routes/web.php                                                 line_ending  
+  ⨯ tests/Feature/CustomerManagementTest.php                       line_ending  
+  ⨯ tests/Feature/HealthCheckTest.php                              line_ending  
+  ⨯ tests/TestCase.php                                             line_ending  
+  ⨯ tests/Unit/ExampleTest.php                                     line_ending  
+

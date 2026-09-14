@@ -1,0 +1,28 @@
+
+   PASS  Tests\Unit\ExampleTest
+  ✓ that true is true                                                    0.43s  
+
+   PASS  Tests\Feature\CsrfProtectionTest
+  ✓ post without token is rejected before handler runs                  17.65s  
+  ✓ post with invalid token is rejected before handler runs              0.72s  
+  ✓ post with valid token reaches handler                                0.59s  
+
+   PASS  Tests\Feature\CustomerManagementTest
+  ✓ list shows all customer fields                                       9.35s  
+  ✓ create assigns unique customer ids across many creates               2.92s  
+  ✓ create skips insert when phone already exists                        0.91s  
+  ✓ create rejects invalid phone format                                  0.69s  
+  ✓ create accepts valid phone                                           0.78s  
+  ✓ edit updates fields without changing customer id                     0.66s  
+  ✓ delete removes customer                                              0.80s  
+  ✓ controller source contains no booking reference                      0.64s  
+  ✓ store without csrf token is rejected before handler runs             0.60s  
+  ✓ destroy without csrf token is rejected before handler runs           1.03s  
+
+   PASS  Tests\Feature\HealthCheckTest
+  ✓ the health check endpoint answers                                    0.75s  
+  ✓ the shell route renders                                              0.60s  
+
+  Tests:    16 passed (343 assertions)
+  Duration: 46.90s
+
