@@ -1,0 +1,35 @@
+{
+    "scenario_id": "GM-017",
+    "captured_at": "2026-09-11T05:51:45Z",
+    "anchor_date": "2026-09-11",
+    "legacy_commit_sha": "c77a6e7fdb549db426c1cb410bc32c31dd236045",
+    "runtime_version": "8.1.34",
+    "normalized_fields": [],
+    "input": {
+        "post": {
+            "id": "",
+            "rid": "2",
+            "name": "Walk-in Guest",
+            "mail": "walkin@example.com",
+            "phone": "918355001",
+            "adult": "1",
+            "children": "0",
+            "date_in": "2026-03-01",
+            "days": "2",
+            "message": "None"
+        }
+    },
+    "output": {
+        "outcome": "REJECTED",
+        "error_code": "CHECKIN_CUSTOMER_INSERT_ON_CLOSED_CONNECTION",
+        "threw": true,
+        "booking_created": true,
+        "booking_status": 1,
+        "room_status": 1,
+        "customer_created": false,
+        "ExceptionType": "Error",
+        "InnerExceptionType": null,
+        "ExceptionMessage": "mysqli object is already closed",
+        "InnerExceptionMessage": null
+    }
+}

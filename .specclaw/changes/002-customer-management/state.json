@@ -1,0 +1,12 @@
+{
+  "change": "002-customer-management",
+  "phase": "build",
+  "branch": "specclaw/002-customer-management",
+  "phases": {
+    "proposal": {"status":"approved","at":"2026-09-14T05:39:14Z"},
+    "spec": {"status":"done","at":"2026-09-14T05:43:27Z"},
+    "design": {"status":"done","at":"2026-09-14T05:44:39Z"},
+    "tasks": {"status":"done","at":"2026-09-14T05:45:02Z"},
+    "build": {"status":"in-progress","at":"2026-09-14T05:45:17Z"}
+  }
+}

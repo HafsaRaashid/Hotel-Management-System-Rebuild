@@ -1,0 +1,1 @@
+SKIPPED: SQ-006 decided no separate frontend build - Bootstrap is CDN-loaded directly in resources/views/layouts/app.blade.php, nothing to compile.

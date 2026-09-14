@@ -1,0 +1,11 @@
+
+   PASS  Tests\Unit\ExampleTest
+  ✓ that true is true                                                    0.27s  
+
+   PASS  Tests\Feature\HealthCheckTest
+  ✓ the health check endpoint answers                                    8.62s  
+  ✓ the shell route renders                                              0.70s  
+
+  Tests:    3 passed (4 assertions)
+  Duration: 12.73s
+

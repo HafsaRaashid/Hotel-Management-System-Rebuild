@@ -1,0 +1,444 @@
+{
+  "bootstrap_schema": 1,
+  "plugin_version": "0.6.9",
+  "generated": "2026-09-12",
+  "generated_at": "2026-09-12T16:33:41Z",
+  "project_root": "/work/Hotel-Management-System-Rebuild",
+  "not_applicable": null,
+  "foundation_ready": true,
+  "stack": {
+    "frontend": "Laravel Blade views + Bootstrap 5 (CDN), no separate frontend build/JS framework",
+    "backend": "PHP 8.2+ / Laravel 11",
+    "orm": "Laravel Eloquent / query builder",
+    "database": "MySQL/MariaDB",
+    "frontend_test_runner": "none (absent-by-decision - see test-frontend pillar)",
+    "backend_test_runner": "PHPUnit"
+  },
+  "decisions_consumed": [
+    {
+      "id": "SQ-001",
+      "decision": "Web application.",
+      "source": ".specclaw/analysis/decisions.md"
+    },
+    {
+      "id": "SQ-002",
+      "decision": "Keep the legacy database engine as-is (MySQL/MariaDB).",
+      "source": ".specclaw/analysis/decisions.md"
+    },
+    {
+      "id": "SQ-003",
+      "decision": "Cloud-hosted, single-tenant.",
+      "source": ".specclaw/analysis/decisions.md"
+    },
+    {
+      "id": "SQ-004",
+      "decision": "Add real authentication/authorization, sized to the target platform (covers CQ-002 and CQ-003 together).",
+      "source": ".specclaw/analysis/decisions.md"
+    },
+    {
+      "id": "SQ-005",
+      "decision": "Migrate all existing production data.",
+      "source": ".specclaw/analysis/decisions.md"
+    },
+    {
+      "id": "SQ-006",
+      "decision": "Laravel Blade views with Bootstrap retained for the admin CRUD modal pattern... no separate frontend build or API layer needed for the admin side.",
+      "source": ".specclaw/analysis/decisions.md"
+    },
+    {
+      "id": "SQ-011",
+      "decision": "Add standard backups/logging/monitoring/CI-CD from day one.",
+      "source": ".specclaw/analysis/decisions.md"
+    },
+    {
+      "id": "SQ-013",
+      "decision": "THEME-ONLY - keep the colour palette/branding tokens; layout is reinterpreted for the target platform.",
+      "source": ".specclaw/analysis/decisions.md"
+    },
+    {
+      "id": "SQ-014",
+      "decision": "PHP + a modern framework (Laravel), including its data-access/ORM approach.",
+      "source": ".specclaw/analysis/decisions.md"
+    }
+  ],
+  "pillars": [
+    {
+      "id": "frontend-shell",
+      "status": "present",
+      "evidence": "resources/views/layouts/app.blade.php:1"
+    },
+    {
+      "id": "frontend-routing",
+      "status": "present",
+      "evidence": "routes/web.php:23"
+    },
+    {
+      "id": "api-client",
+      "status": "absent-by-decision",
+      "reason": "SQ-006 decided server-rendered Laravel Blade views with no separate JS framework, and SQ-014/target-architecture.md decided a single Laravel application with no separate API surface - there is no separate frontend consumer for an api-client mechanism to serve."
+    },
+    {
+      "id": "backend-solution",
+      "status": "present",
+      "evidence": "app/Http/Controllers/Controller.php:1"
+    },
+    {
+      "id": "di",
+      "status": "present",
+      "evidence": "bootstrap/providers.php:6"
+    },
+    {
+      "id": "config",
+      "status": "present",
+      "evidence": "config/app.php:1"
+    },
+    {
+      "id": "cors",
+      "status": "absent-by-decision",
+      "reason": "SQ-006 and SQ-014 together decided a single server-rendered Laravel application with no separate frontend origin - there is no cross-origin caller for a CORS policy to govern."
+    },
+    {
+      "id": "error-handling",
+      "status": "present",
+      "evidence": "bootstrap/app.php:25"
+    },
+    {
+      "id": "persistence",
+      "status": "present",
+      "evidence": "config/database.php:20"
+    },
+    {
+      "id": "migrations",
+      "status": "present",
+      "evidence": "database/migrations/0001_01_01_000001_create_cache_table.php:1"
+    },
+    {
+      "id": "health-check",
+      "status": "present",
+      "evidence": "bootstrap/app.php:17"
+    },
+    {
+      "id": "test-frontend",
+      "status": "absent-by-decision",
+      "reason": "SQ-006 decided no separate JS framework/frontend build; rendered Blade output is exercised through the same PHPUnit feature-test suite as the backend (see tests/Feature/HealthCheckTest.php), so a distinct frontend test runner has nothing of its own to test."
+    },
+    {
+      "id": "test-backend",
+      "status": "present",
+      "evidence": "phpunit.xml:1"
+    },
+    {
+      "id": "theme-plumbing",
+      "status": "present",
+      "evidence": "public/css/theme.css:1"
+    }
+  ],
+  "files_created": [
+    {
+      "path": ".env.example",
+      "purpose": "config"
+    },
+    {
+      "path": ".gitignore",
+      "purpose": "build"
+    },
+    {
+      "path": "app/Http/Controllers/Controller.php",
+      "purpose": "routing"
+    },
+    {
+      "path": "app/Providers/AppServiceProvider.php",
+      "purpose": "di"
+    },
+    {
+      "path": "artisan",
+      "purpose": "build"
+    },
+    {
+      "path": "bootstrap/app.php",
+      "purpose": "routing"
+    },
+    {
+      "path": "bootstrap/cache/.gitignore",
+      "purpose": "build"
+    },
+    {
+      "path": "bootstrap/providers.php",
+      "purpose": "di"
+    },
+    {
+      "path": "composer.json",
+      "purpose": "build"
+    },
+    {
+      "path": "config/app.php",
+      "purpose": "config"
+    },
+    {
+      "path": "config/auth.php",
+      "purpose": "config"
+    },
+    {
+      "path": "config/cache.php",
+      "purpose": "config"
+    },
+    {
+      "path": "config/database.php",
+      "purpose": "persistence"
+    },
+    {
+      "path": "config/filesystems.php",
+      "purpose": "config"
+    },
+    {
+      "path": "config/logging.php",
+      "purpose": "error-handling"
+    },
+    {
+      "path": "config/mail.php",
+      "purpose": "config"
+    },
+    {
+      "path": "config/queue.php",
+      "purpose": "config"
+    },
+    {
+      "path": "config/services.php",
+      "purpose": "config"
+    },
+    {
+      "path": "config/session.php",
+      "purpose": "config"
+    },
+    {
+      "path": "database/migrations/0001_01_01_000001_create_cache_table.php",
+      "purpose": "migrations"
+    },
+    {
+      "path": "database/migrations/0001_01_01_000002_create_jobs_table.php",
+      "purpose": "migrations"
+    },
+    {
+      "path": "database/seeders/DatabaseSeeder.php",
+      "purpose": "persistence"
+    },
+    {
+      "path": "phpunit.xml",
+      "purpose": "test-harness"
+    },
+    {
+      "path": "public/.htaccess",
+      "purpose": "routing"
+    },
+    {
+      "path": "public/css/theme.css",
+      "purpose": "theme"
+    },
+    {
+      "path": "public/index.php",
+      "purpose": "shell"
+    },
+    {
+      "path": "resources/views/layouts/app.blade.php",
+      "purpose": "shell"
+    },
+    {
+      "path": "resources/views/shell.blade.php",
+      "purpose": "shell"
+    },
+    {
+      "path": "routes/console.php",
+      "purpose": "routing"
+    },
+    {
+      "path": "routes/web.php",
+      "purpose": "routing"
+    },
+    {
+      "path": "storage/app/public/.gitignore",
+      "purpose": "build"
+    },
+    {
+      "path": "storage/framework/cache/data/.gitignore",
+      "purpose": "build"
+    },
+    {
+      "path": "storage/framework/sessions/.gitignore",
+      "purpose": "build"
+    },
+    {
+      "path": "storage/framework/testing/.gitignore",
+      "purpose": "build"
+    },
+    {
+      "path": "storage/framework/views/.gitignore",
+      "purpose": "build"
+    },
+    {
+      "path": "storage/logs/.gitignore",
+      "purpose": "build"
+    },
+    {
+      "path": "tests/Feature/HealthCheckTest.php",
+      "purpose": "test-harness"
+    },
+    {
+      "path": "tests/TestCase.php",
+      "purpose": "test-harness"
+    },
+    {
+      "path": "tests/Unit/ExampleTest.php",
+      "purpose": "test-harness"
+    }
+  ],
+  "route_census": [
+    {
+      "route": "/",
+      "kind": "shell",
+      "file": "routes/web.php:23"
+    },
+    {
+      "route": "/up",
+      "kind": "health",
+      "file": "bootstrap/app.php:17"
+    }
+  ],
+  "screen_census": [
+    {
+      "screen": "app shell",
+      "kind": "shell",
+      "file": "resources/views/shell.blade.php:1"
+    },
+    {
+      "screen": "shared layout",
+      "kind": "layout",
+      "file": "resources/views/layouts/app.blade.php:1"
+    }
+  ],
+  "ui_tokens_imported": [],
+  "ui_tokens_skipped_reason": "SQ-013 decided THEME-ONLY, but .specclaw/ui/design-tokens.json and .specclaw/ui/ui-inventory.md do not exist in this repo - the bf-ui workstream has never run against the legacy app. No TK-### group of any scope exists to import, so the theme mechanism (public/css/theme.css, linked from resources/views/layouts/app.blade.php) was created with every custom property left unset.",
+  "plan": ".specclaw/bootstrap/bootstrap-plan.md",
+  "gate": {
+    "result": "PASS",
+    "checks_run": 7,
+    "checks": [
+      {
+        "check": "pillar-vocabulary",
+        "result": "PASS",
+        "detail": "every declared pillar id is in the closed set"
+      },
+      {
+        "check": "no-capability-files",
+        "result": "PASS",
+        "detail": "no file declares a capability purpose"
+      },
+      {
+        "check": "route-census",
+        "result": "PASS",
+        "detail": "1 health route(s), every other route shell/error/layout"
+      },
+      {
+        "check": "screen-census",
+        "result": "PASS",
+        "detail": "every declared screen is shell/error/layout"
+      },
+      {
+        "check": "no-rule-or-item-citations",
+        "result": "PASS",
+        "detail": "no DR-###/BL-###/SCR-### id appears in any created file (necessary, not sufficient — see CONTRACT.md (n.4))"
+      },
+      {
+        "check": "declared-tokens-only",
+        "result": "PASS",
+        "detail": "only declared token group(s) appear: none"
+      },
+      {
+        "check": "smoke-vocabulary",
+        "result": "PASS",
+        "detail": "every declared smoke check id is in the closed set"
+      }
+    ],
+    "problems": [],
+    "limits": "Declared-census check plus DR/BL/SCR/TK id greps over the files the census names. It cannot prove the absence of capability logic — a rule implemented without citing its DR id passes. See templates/CONTRACT.md (n.4)."
+  },
+  "smoke": [
+    {
+      "check": "api-build",
+      "result": "PASS",
+      "detail": "",
+      "log": ".specclaw/bootstrap/smoke/api-build.log",
+      "required": true,
+      "command": "composer install --no-interaction --prefer-dist"
+    },
+    {
+      "check": "api-start",
+      "result": "PASS",
+      "detail": "",
+      "log": ".specclaw/bootstrap/smoke/api-start.log",
+      "required": true,
+      "command": "php artisan serve --port=8000 & pid=$!; sleep 2; curl -sf http://127.0.0.1:8000/up; kill $pid"
+    },
+    {
+      "check": "db-connect",
+      "result": "PASS",
+      "detail": "",
+      "log": ".specclaw/bootstrap/smoke/db-connect.log",
+      "required": true,
+      "command": "php artisan db:show"
+    },
+    {
+      "check": "migrations-infra",
+      "result": "PASS",
+      "detail": "",
+      "log": ".specclaw/bootstrap/smoke/migrations-infra.log",
+      "required": true,
+      "command": "php artisan migrate --force"
+    },
+    {
+      "check": "test-backend",
+      "result": "PASS",
+      "detail": "",
+      "log": ".specclaw/bootstrap/smoke/test-backend.log",
+      "required": true,
+      "command": "php artisan test"
+    },
+    {
+      "check": "frontend-build",
+      "result": "SKIPPED",
+      "detail": "SQ-006 decided no separate frontend build - Bootstrap is CDN-loaded directly in resources/views/layouts/app.blade.php, nothing to compile.",
+      "log": ".specclaw/bootstrap/smoke/frontend-build.log",
+      "required": false,
+      "command": null
+    },
+    {
+      "check": "frontend-start",
+      "result": "SKIPPED",
+      "detail": "No separate frontend process exists; the same Laravel process serves Blade views (see api-start).",
+      "log": ".specclaw/bootstrap/smoke/frontend-start.log",
+      "required": false,
+      "command": null
+    },
+    {
+      "check": "test-frontend",
+      "result": "SKIPPED",
+      "detail": "No separate frontend test runner exists - see the test-frontend pillar's reason.",
+      "log": ".specclaw/bootstrap/smoke/test-frontend.log",
+      "required": false,
+      "command": null
+    },
+    {
+      "check": "frontend-to-api",
+      "result": "SKIPPED",
+      "detail": "No frontend/API boundary exists (api-client pillar is absent-by-decision) - there is nothing to prove connects.",
+      "log": ".specclaw/bootstrap/smoke/frontend-to-api.log",
+      "required": false,
+      "command": null
+    }
+  ],
+  "smoke_summary": {
+    "total": 9,
+    "passed": 5,
+    "failed": 0,
+    "skipped": 4
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "change": "001-csrf-baseline",
+  "phase": "verify",
+  "branch": "specclaw/001-csrf-baseline",
+  "phases": {
+    "proposal": {"status":"approved","at":"2026-09-14T04:28:45Z"},
+    "spec": {"status":"done","at":"2026-09-14T04:30:30Z"},
+    "design": {"status":"done","at":"2026-09-14T04:31:03Z"},
+    "tasks": {"status":"done","at":"2026-09-14T04:31:30Z"},
+    "build": {"status":"done","at":"2026-09-14T05:28:08Z"},
+    "verify": {"status":"passed","at":"2026-09-14T05:32:51Z","verdict":"PASS"}
+  }
+}
