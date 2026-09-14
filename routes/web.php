@@ -1,9 +1,13 @@
 <?php
 
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\MarketingController;
+use App\Http\Controllers\PendingBookingController;
 use App\Http\Controllers\RoomCategoryController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\StayController;
+use App\Http\Controllers\WalkInController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,6 +35,25 @@ Route::get('/', [MarketingController::class, 'home'])->name('marketing.home');
 Route::get('/rooms-overview', [MarketingController::class, 'room'])->name('marketing.room');
 Route::get('/services', [MarketingController::class, 'services'])->name('marketing.services');
 Route::get('/food', [MarketingController::class, 'food'])->name('marketing.food');
+
+/*
+| MOD-004 - Booking & Stay Lifecycle (BL-015). Public reservation intake.
+*/
+Route::get('/book', [BookingController::class, 'create'])->name('booking.create');
+Route::post('/book', [BookingController::class, 'store'])->name('booking.store');
+Route::get('/walk-in', [WalkInController::class, 'available'])->name('walk-in.available');
+Route::get('/walk-in/create', [WalkInController::class, 'create'])->name('walk-in.create');
+Route::post('/walk-in', [WalkInController::class, 'store'])->name('walk-in.store');
+Route::get('/bookings/pending', [PendingBookingController::class, 'index'])->name('bookings.pending');
+Route::delete('/bookings/pending/{booking}', [PendingBookingController::class, 'destroy'])->name('bookings.pending.destroy');
+Route::get('/bookings/pending/{booking}/convert', [PendingBookingController::class, 'showConvert'])->name('bookings.pending.convert.show');
+Route::post('/bookings/pending/{booking}/convert', [PendingBookingController::class, 'convert'])->name('bookings.pending.convert');
+Route::get('/stays', [StayController::class, 'index'])->name('stays.index');
+Route::get('/stays/{booking}/checkout', [StayController::class, 'showCheckout'])->name('stays.checkout.show');
+Route::post('/stays/{booking}/checkout', [StayController::class, 'checkout'])->name('stays.checkout');
+Route::get('/stays/{booking}/edit', [StayController::class, 'edit'])->name('stays.edit');
+Route::put('/stays/{booking}', [StayController::class, 'updateDate'])->name('stays.update');
+Route::get('/stays/{booking}', [StayController::class, 'show'])->name('stays.show');
 
 /*
 | MOD-005 - Customer Management (BL-006/BL-007/BL-008). No `/admin` prefix

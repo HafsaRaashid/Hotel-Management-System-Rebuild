@@ -71,10 +71,18 @@ class MarketingSiteTest extends TestCase
         }
     }
 
-    public function test_book_now_link_points_at_a_plain_book_path(): void
+    /**
+     * AC-15 (.specclaw/changes/005-booking-stay-lifecycle/spec.md) - "Book
+     * Now" used to be a plain, unrouted /book string (BL-015 wasn't built
+     * yet); now that it is, the link must resolve to the real booking form,
+     * not 404.
+     */
+    public function test_book_now_link_resolves_to_the_booking_form(): void
     {
         $response = $this->get(route('marketing.home'));
 
-        $response->assertSee('href="/book"', false);
+        $response->assertSee('href="'.route('booking.create').'"', false);
+
+        $this->get(route('booking.create'))->assertStatus(200);
     }
 }
