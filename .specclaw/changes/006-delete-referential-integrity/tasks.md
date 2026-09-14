@@ -2,11 +2,11 @@
 
 **Change:** 006-delete-referential-integrity
 **Created:** 2026-09-14
-**Total Tasks:** 4
+**Total Tasks:** 5
 
 ## Summary
 
-Two waves. Wave 1 implements both controllers' delete logic independently (different files, no shared dependency). Wave 2 tests both.
+Two waves. Wave 1 implements both controllers' delete logic independently (different files, no shared dependency). Wave 2 tests both. A 5th task (T5, post-verify remediation) was added after the first verify pass (PARTIAL) found a real gap this change's own FK relax introduced.
 
 ## Tasks
 
@@ -41,6 +41,15 @@ Two waves. Wave 1 implements both controllers' delete logic independently (diffe
   - Kind: test
   - Depends: T2
   - Notes: AC-4 (regression: unreferenced customer still deletes), AC-5 (active-booking reference blocks delete), AC-6 (checked-out/cancelled-only reference does not block delete). No new CSRF test needed — change 002's `test_destroy_without_csrf_token_is_rejected_before_handler_runs` already covers the customer-delete route and still applies unchanged.
+
+### Wave 3 — Post-verify remediation
+
+- [x] `T5` — Guard StayController::checkout() against a non-checked-in booking
+  - Files: `app/Http/Controllers/StayController.php` (modify), `resources/views/stays/index.blade.php` (modify), `tests/Feature/StayLifecycleTest.php` (modify)
+  - Estimate: small
+  - Kind: impl
+  - Depends: T3, T4
+  - Notes: The first verify pass (PARTIAL) found that this change's FK relax (T1/T3) made `$booking->customer` unsafe inside `checkout()` for the first time — see spec.md's Notes. Both `showCheckout()` and `checkout()` now redirect with a flash error unless `$booking->status === Booking::STATUS_CHECKED_IN`, before touching any relation. Two regression tests added.
 
 ---
 
