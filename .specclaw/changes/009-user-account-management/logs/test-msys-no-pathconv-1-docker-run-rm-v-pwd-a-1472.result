@@ -1,0 +1,7 @@
+exit=1
+duration_s=2
+log=.specclaw/changes/009-user-account-management/logs/test-msys-no-pathconv-1-docker-run-rm-v-pwd-a-1472.log
+head=bc66af01f49fea0f08b9ca41209db0de5161c7a0
+dirty=true
+cmd=MSYS_NO_PATHCONV=1 docker run --rm -v "$(pwd):/app" -w /app php:8.2-cli php artisan test
+interrupted=false
