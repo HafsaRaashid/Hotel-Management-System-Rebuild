@@ -280,6 +280,9 @@ _Depends on: none. module dependency rank undefined — module-map.md describes 
 **Verification:** NO BASELINE DATA — baseline has been run, but no scenario in scenarios.md cites this item's rules
 **UI fidelity:** ⚠ UI GROUNDING MISSING — THEME-ONLY decided (SQ-013) but these artifacts are absent: .specclaw/ui/ui-inventory.md, .specclaw/ui/design-tokens.json, .specclaw/ui/screens/, .specclaw/ui/ui-manifest.json — run /specclaw:bf-ui
 
+**Status notes (human-added):**
+BUILT: change `003-room-rate-management`, verify-report.md verdict PASS (10/10 acceptance criteria across BL-002/003/005) 2026-09-14, merged to `main`. Functional-only (no UI fidelity — still gated above).
+
 ---
 
 ### BL-003 — Room Create/Edit
@@ -296,6 +299,9 @@ _Depends on: none. module dependency rank undefined — module-map.md describes 
 **Gate:** OPEN QUESTIONS — UI fidelity: SQ-013 decided THEME-ONLY, required artifacts missing
 **Verification:** NO BASELINE DATA — baseline has been run, but no scenario in scenarios.md cites this item's rules
 **UI fidelity:** ⚠ UI GROUNDING MISSING — THEME-ONLY decided (SQ-013) but these artifacts are absent: .specclaw/ui/ui-inventory.md, .specclaw/ui/design-tokens.json, .specclaw/ui/screens/, .specclaw/ui/ui-manifest.json — run /specclaw:bf-ui
+
+**Status notes (human-added):**
+BUILT: change `003-room-rate-management`, verify-report.md verdict PASS 2026-09-14, merged to `main`. The forward-looking consistency point above is already satisfied: the `category` select reads live from `room_categories` (BL-005, built in the same change), never hardcoded.
 
 ---
 
@@ -314,6 +320,9 @@ _Depends on: none. module dependency rank undefined — module-map.md describes 
 **Verification:** NO BASELINE DATA — baseline has been run, but no scenario in scenarios.md cites this item's rules
 **UI fidelity:** ⚠ UI GROUNDING MISSING — THEME-ONLY decided (SQ-013) but these artifacts are absent: .specclaw/ui/ui-inventory.md, .specclaw/ui/design-tokens.json, .specclaw/ui/screens/, .specclaw/ui/ui-manifest.json — run /specclaw:bf-ui
 
+**Status notes (human-added):**
+BUILT: change `003-room-rate-management`, verify-report.md verdict PASS 2026-09-14, merged to `main`. Migration seeds the 3 legacy categories (Single/Double/Deluxe at 99/149/199), matching the static prices `homepage/index.php`/`homepage/room.php` currently hardcode — see BL-009's own note on this once MOD-006 is built.
+
 ---
 
 ### BL-004 — Room Delete
@@ -330,6 +339,9 @@ _Depends on: none. module dependency rank undefined — module-map.md describes 
 - No fixture anywhere in `manifest.json` captures the *decided* CQ-024 rejection path (delete blocked when an active booking still references the room) — this is new decided behavior with no legacy precedent to replay, so a new golden-master-style scenario must be authored and captured against the rebuilt handler, not against legacy source.
 **Gate:** CLEAR
 **Verification:** NO BASELINE DATA — baseline has been run, but no scenario in scenarios.md cites this item's rules
+
+**Status notes (human-added):**
+NOT BUILT — held out of change `003-room-rate-management` deliberately (not an oversight): this item's own acceptance basis above requires shipping CQ-021's fix and CQ-024's check "together, not delete alone deferred," but CQ-024's check needs the `booking` table, which does not exist (MOD-004 unbuilt). Unlike BL-008 (Customer Delete), this item's wording rules out a partial/item-split build, so it was left for a future change once MOD-004 lands. See `.specclaw/changes/003-room-rate-management/spec.md`'s "Item Held Out" section.
 
 ## MOD-005 — Customer Management
 

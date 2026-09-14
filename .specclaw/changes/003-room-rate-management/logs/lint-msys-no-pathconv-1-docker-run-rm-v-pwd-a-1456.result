@@ -1,0 +1,7 @@
+exit=1
+duration_s=16
+log=.specclaw/changes/003-room-rate-management/logs/lint-msys-no-pathconv-1-docker-run-rm-v-pwd-a-1456.log
+head=15375dcf067329e374a39f68382a6e283fbdb525
+dirty=true
+cmd=MSYS_NO_PATHCONV=1 docker run --rm -v "$(pwd):/app" -w /app php:8.2-cli php vendor/bin/pint --test
+interrupted=false

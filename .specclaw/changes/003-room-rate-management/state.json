@@ -1,12 +1,13 @@
 {
   "change": "003-room-rate-management",
-  "phase": "build",
+  "phase": "verify",
   "branch": "specclaw/003-room-rate-management",
   "phases": {
     "proposal": {"status":"approved","at":"2026-09-14T06:43:06Z"},
     "spec": {"status":"done","at":"2026-09-14T06:44:13Z"},
     "design": {"status":"done","at":"2026-09-14T06:44:49Z"},
     "tasks": {"status":"done","at":"2026-09-14T06:45:18Z"},
-    "build": {"status":"failed","at":"2026-09-14T06:54:59Z","tasks":{"done":9,"total":9,"failed":0}}
+    "build": {"status":"failed","at":"2026-09-14T06:54:59Z","tasks":{"done":9,"total":9,"failed":0}},
+    "verify": {"status":"passed","at":"2026-09-14T07:02:23Z","verdict":"PASS"}
   }
 }
