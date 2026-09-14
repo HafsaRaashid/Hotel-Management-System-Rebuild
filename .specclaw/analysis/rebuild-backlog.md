@@ -447,6 +447,9 @@ _Depends on: MOD-003. module dependency rank undefined — module-map.md describ
 - **DR-009** itself is pinned in isolation by GM-018/GM-019/GM-020 (all `VERIFIABLE`, shared with BL-021/BL-022) — no scenario asserts that this specific form's `days` field is actually populated from that formula at render time; a light-touch new capture may be warranted to close that specific gap.
 **Gate:** OPEN QUESTIONS — UI fidelity: SQ-013 decided THEME-ONLY, required artifacts missing
 **Verification:** VERIFIABLE — fixtures: GM-016 (c77a6e7fdb549db426c1cb410bc32c31dd236045), GM-018 (c77a6e7fdb549db426c1cb410bc32c31dd236045), GM-019 (c77a6e7fdb549db426c1cb410bc32c31dd236045), GM-020 (c77a6e7fdb549db426c1cb410bc32c31dd236045)
+
+**Status notes (human-added):**
+BUILT: change `005-booking-stay-lifecycle`, verify-report.md verdict PASS 2026-09-14, merged to `main`. DR-007 satisfied as one composite write (booking status + room assignment + room status), with a room-category-match constraint (design.md FR-10) enforced server-side.
 **UI fidelity:** ⚠ UI GROUNDING MISSING — THEME-ONLY decided (SQ-013) but these artifacts are absent: .specclaw/ui/ui-inventory.md, .specclaw/ui/design-tokens.json, .specclaw/ui/screens/, .specclaw/ui/ui-manifest.json — run /specclaw:bf-ui
 
 ---
@@ -462,6 +465,9 @@ _Depends on: MOD-003. module dependency rank undefined — module-map.md describ
 - No `GM-NNN` scenario targets `admin/check_in.php`'s list view directly. New capture or acceptance-criteria-only build needed.
 **Gate:** OPEN QUESTIONS — UI fidelity: SQ-013 decided THEME-ONLY, required artifacts missing
 **Verification:** NO BASELINE DATA — baseline has been run, but no scenario in scenarios.md cites this item's rules
+
+**Status notes (human-added):**
+BUILT: change `005-booking-stay-lifecycle`, verify-report.md verdict PASS 2026-09-14, merged to `main`.
 **UI fidelity:** ⚠ UI GROUNDING MISSING — THEME-ONLY decided (SQ-013) but these artifacts are absent: .specclaw/ui/ui-inventory.md, .specclaw/ui/design-tokens.json, .specclaw/ui/screens/, .specclaw/ui/ui-manifest.json — run /specclaw:bf-ui
 
 ---
@@ -487,6 +493,9 @@ _Depends on: MOD-003. module dependency rank undefined — module-map.md describ
 - Because this whole sequence executes inside one server-side script per one form submission (no separate client-orchestrated network calls chain these steps), the existing GM-006 through GM-014 fixtures do exercise the full composite sequence end-to-end within their own scope, not merely isolated backend steps — however, none of them yet assert the CQ-011 FK population (`booking.customer_id`), since that column does not exist in the legacy schema captured by these fixtures. A new scenario asserting the FK is correctly populated is needed before CQ-011's design can be marked VERIFIABLE for this item.
 **Gate:** OPEN QUESTIONS — UI fidelity: SQ-013 decided THEME-ONLY, required artifacts missing
 **Verification:** VERIFIABLE — fixtures: GM-006 (c77a6e7fdb549db426c1cb410bc32c31dd236045), GM-007 (c77a6e7fdb549db426c1cb410bc32c31dd236045), GM-008 (c77a6e7fdb549db426c1cb410bc32c31dd236045), GM-009 (c77a6e7fdb549db426c1cb410bc32c31dd236045), GM-010 (c77a6e7fdb549db426c1cb410bc32c31dd236045), GM-011 (c77a6e7fdb549db426c1cb410bc32c31dd236045), GM-012 (c77a6e7fdb549db426c1cb410bc32c31dd236045), GM-013 (c77a6e7fdb549db426c1cb410bc32c31dd236045), GM-014 (c77a6e7fdb549db426c1cb410bc32c31dd236045), GM-015 (c77a6e7fdb549db426c1cb410bc32c31dd236045), GM-033 (c77a6e7fdb549db426c1cb410bc32c31dd236045)
+
+**Status notes (human-added):**
+BUILT: change `005-booking-stay-lifecycle`, verify-report.md verdict PASS 2026-09-14, merged to `main`. DR-003/004/005/006(-as-corrected-by-CQ-004)/CQ-009/CQ-010/CQ-011/CQ-012 all implemented and tested. Golden-master fixtures (GM-006 through GM-015/GM-033) not yet replayed against the rebuild — /specclaw:bf-replay has not run in this project; several (GM-014) pin the pre-CQ-004-fix legacy defect and must not be treated as parity targets.
 **UI fidelity:** ⚠ UI GROUNDING MISSING — THEME-ONLY decided (SQ-013) but these artifacts are absent: .specclaw/ui/ui-inventory.md, .specclaw/ui/design-tokens.json, .specclaw/ui/screens/, .specclaw/ui/ui-manifest.json — run /specclaw:bf-ui
 
 ---
@@ -513,6 +522,9 @@ _Depends on: MOD-003. module dependency rank undefined — module-map.md describ
 - Because the crash occurs partway through one server-side script (not across separate client-orchestrated requests), fixing CQ-022 only requires reordering statements within this one handler — no separate frontend-orchestration step is missing here, so this item's gap is a backend defect, not a composite-flow omission, and existing fixtures (once re-captured) will fully exercise it end-to-end.
 **Gate:** OPEN QUESTIONS — UI fidelity: SQ-013 decided THEME-ONLY, required artifacts missing
 **Verification:** VERIFIABLE — fixtures: GM-006 (c77a6e7fdb549db426c1cb410bc32c31dd236045), GM-007 (c77a6e7fdb549db426c1cb410bc32c31dd236045), GM-008 (c77a6e7fdb549db426c1cb410bc32c31dd236045), GM-009 (c77a6e7fdb549db426c1cb410bc32c31dd236045), GM-010 (c77a6e7fdb549db426c1cb410bc32c31dd236045), GM-011 (c77a6e7fdb549db426c1cb410bc32c31dd236045), GM-012 (c77a6e7fdb549db426c1cb410bc32c31dd236045), GM-013 (c77a6e7fdb549db426c1cb410bc32c31dd236045), GM-014 (c77a6e7fdb549db426c1cb410bc32c31dd236045), GM-015 (c77a6e7fdb549db426c1cb410bc32c31dd236045), GM-017 (c77a6e7fdb549db426c1cb410bc32c31dd236045), GM-033 (c77a6e7fdb549db426c1cb410bc32c31dd236045)
+
+**Status notes (human-added):**
+BUILT: change `005-booking-stay-lifecycle`, verify-report.md verdict PASS 2026-09-14, merged to `main`. DR-003/004/005/006/008 and CQ-011/CQ-012 implemented (independently from BL-015, per module-map.md's note that the legacy duplicates this logic per call site). CQ-022's connection-lifecycle crash does not apply in Eloquent — see design.md's Key Decisions.
 **UI fidelity:** ⚠ UI GROUNDING MISSING — THEME-ONLY decided (SQ-013) but these artifacts are absent: .specclaw/ui/ui-inventory.md, .specclaw/ui/design-tokens.json, .specclaw/ui/screens/, .specclaw/ui/ui-manifest.json — run /specclaw:bf-ui
 
 ---
@@ -529,6 +541,9 @@ _Depends on: MOD-003. module dependency rank undefined — module-map.md describ
 - No `GM-NNN` scenario in `scenarios.md` targets `admin/booked.php`'s list view or `admin/delete_booking.php`'s cancellation handler at all — this is a real baseline gap (unlike BL-004/BL-008's delete handlers, no PS-seam scenario was captured for booking cancellation). Recommend capturing the legacy hard-delete behavior as a reference point before building the CQ-014 replacement, so the new status/soft-delete write can be checked against a known "what used to happen" baseline rather than being built with zero baseline evidence at all.
 **Gate:** OPEN QUESTIONS — UI fidelity: SQ-013 decided THEME-ONLY, required artifacts missing
 **Verification:** NO BASELINE DATA — baseline has been run, but no scenario in scenarios.md cites this item's rules
+
+**Status notes (human-added):**
+BUILT: change `005-booking-stay-lifecycle`, verify-report.md verdict PASS 2026-09-14, merged to `main`. CQ-014 satisfied — cancellation sets a new cancelled status value, never deletes the row.
 **UI fidelity:** ⚠ UI GROUNDING MISSING — THEME-ONLY decided (SQ-013) but these artifacts are absent: .specclaw/ui/ui-inventory.md, .specclaw/ui/design-tokens.json, .specclaw/ui/screens/, .specclaw/ui/ui-manifest.json — run /specclaw:bf-ui
 
 ---
@@ -544,6 +559,9 @@ _Depends on: MOD-003. module dependency rank undefined — module-map.md describ
 - No `GM-NNN` scenario targets `admin/check_out.php`'s list view directly. New capture or acceptance-criteria-only build needed.
 **Gate:** OPEN QUESTIONS — UI fidelity: SQ-013 decided THEME-ONLY, required artifacts missing
 **Verification:** NO BASELINE DATA — baseline has been run, but no scenario in scenarios.md cites this item's rules
+
+**Status notes (human-added):**
+BUILT: change `005-booking-stay-lifecycle`, verify-report.md verdict PASS 2026-09-14, merged to `main`.
 **UI fidelity:** ⚠ UI GROUNDING MISSING — THEME-ONLY decided (SQ-013) but these artifacts are absent: .specclaw/ui/ui-inventory.md, .specclaw/ui/design-tokens.json, .specclaw/ui/screens/, .specclaw/ui/ui-manifest.json — run /specclaw:bf-ui
 
 ---
@@ -567,6 +585,9 @@ _Depends on: MOD-003. module dependency rank undefined — module-map.md describ
 - Because `admin/xulicheckout.php` performs all three writes inside one server-side handler call triggered by one "Payment & Check Out" click (not three separate client-orchestrated requests), GM-024 does exercise this composite write end-to-end — however, note that GM-024's assertions were captured against the *legacy* room-matching mechanism; once CQ-023 changes that mechanism, GM-024 itself may also need re-capture to confirm the id-based match still produces the same net outcome (room freed) even though the matching key changed.
 **Gate:** OPEN QUESTIONS — UI fidelity: SQ-013 decided THEME-ONLY, required artifacts missing
 **Verification:** VERIFIABLE — fixtures: GM-018 (c77a6e7fdb549db426c1cb410bc32c31dd236045), GM-019 (c77a6e7fdb549db426c1cb410bc32c31dd236045), GM-020 (c77a6e7fdb549db426c1cb410bc32c31dd236045), GM-021 (c77a6e7fdb549db426c1cb410bc32c31dd236045), GM-022 (c77a6e7fdb549db426c1cb410bc32c31dd236045), GM-023 (c77a6e7fdb549db426c1cb410bc32c31dd236045), GM-024 (c77a6e7fdb549db426c1cb410bc32c31dd236045), GM-025 (c77a6e7fdb549db426c1cb410bc32c31dd236045)
+
+**Status notes (human-added):**
+BUILT: change `005-booking-stay-lifecycle`, verify-report.md verdict PASS 2026-09-14, merged to `main`. CQ-005 (server-side payment validation, recomputed not client-trusted), CQ-011 (charges billed via customer_id FK), CQ-023 (room freed via id, not name-text) all satisfied and independently tested.
 **UI fidelity:** ⚠ UI GROUNDING MISSING — THEME-ONLY decided (SQ-013) but these artifacts are absent: .specclaw/ui/ui-inventory.md, .specclaw/ui/design-tokens.json, .specclaw/ui/screens/, .specclaw/ui/ui-manifest.json — run /specclaw:bf-ui
 
 ---
@@ -583,6 +604,9 @@ _Depends on: MOD-003. module dependency rank undefined — module-map.md describ
 - No `GM-NNN` scenario in `scenarios.md` targets `admin/xulieditcheckin.php` directly — only the shared DR-009 pure-function formula is captured in isolation (GM-018/019/020), not this specific handler's failure to apply it to the stored column. A new scenario capturing "edit checkout date → `days_of_stay` recomputed and persisted" is needed before this item can be marked VERIFIABLE; there is no existing fixture proving even the legacy (non-recomputing) behavior for direct comparison.
 **Gate:** OPEN QUESTIONS — UI fidelity: SQ-013 decided THEME-ONLY, required artifacts missing
 **Verification:** VERIFIABLE — fixtures: GM-018 (c77a6e7fdb549db426c1cb410bc32c31dd236045), GM-019 (c77a6e7fdb549db426c1cb410bc32c31dd236045), GM-020 (c77a6e7fdb549db426c1cb410bc32c31dd236045)
+
+**Status notes (human-added):**
+BUILT: change `005-booking-stay-lifecycle`, verify-report.md verdict PASS 2026-09-14, merged to `main`. CQ-016 satisfied — days_of_stay is recomputed and persisted alongside dateout in one update() call, not left stale.
 **UI fidelity:** ⚠ UI GROUNDING MISSING — THEME-ONLY decided (SQ-013) but these artifacts are absent: .specclaw/ui/ui-inventory.md, .specclaw/ui/design-tokens.json, .specclaw/ui/screens/, .specclaw/ui/ui-manifest.json — run /specclaw:bf-ui
 
 ---
@@ -598,6 +622,9 @@ _Depends on: MOD-003. module dependency rank undefined — module-map.md describ
 - No `GM-NNN` scenario targets `admin/view_check_out.php` directly. Given its purely read-only, no-input nature, acceptance can rest on the entity-field quote above without a dedicated golden-master capture, though a light-touch rendering test is still recommended.
 **Gate:** OPEN QUESTIONS — UI fidelity: SQ-013 decided THEME-ONLY, required artifacts missing
 **Verification:** NO BASELINE DATA — baseline has been run, but no scenario in scenarios.md cites this item's rules
+
+**Status notes (human-added):**
+BUILT: change `005-booking-stay-lifecycle`, verify-report.md verdict PASS (15/15 acceptance criteria across BL-015 through BL-023) 2026-09-14, merged to `main`. Read-only view; renders ref_no/name/phone/dates/days/price directly from the booking row and its relations.
 **UI fidelity:** ⚠ UI GROUNDING MISSING — THEME-ONLY decided (SQ-013) but these artifacts are absent: .specclaw/ui/ui-inventory.md, .specclaw/ui/design-tokens.json, .specclaw/ui/screens/, .specclaw/ui/ui-manifest.json — run /specclaw:bf-ui
 
 ---
