@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\MarketingController;
@@ -23,6 +24,14 @@ use Illuminate\Support\Facades\Route;
 | routes, added as that item was built.
 |
 */
+
+/*
+| MOD-001 - Admin Authentication (BL-010). Public - a session doesn't exist
+| yet at this point in the request.
+*/
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.attempt');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 /*
 | MOD-006 - Public Marketing Site (BL-009). Replaces the foundation's shell
