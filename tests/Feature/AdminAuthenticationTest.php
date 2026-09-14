@@ -38,10 +38,13 @@ class AdminAuthenticationTest extends TestCase
 
     public function test_login_with_correct_credentials_succeeds(): void
     {
+        // BL-024 (change 008-dashboard-reporting): login now lands on the
+        // dashboard, not customers.index directly - see that change's
+        // spec.md AC-8.
         $this->post(route('login.attempt'), [
             'username' => 'admin',
             'password' => 'password123',
-        ])->assertRedirect(route('customers.index'));
+        ])->assertRedirect(route('dashboard'));
 
         $this->assertAuthenticated();
 

@@ -8,6 +8,7 @@
 <nav class="navbar navbar-expand navbar-dark bg-dark mb-4">
     <div class="container">
         <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a></li>
             <li class="nav-item"><a class="nav-link" href="{{ route('customers.index') }}">Customers</a></li>
             <li class="nav-item"><a class="nav-link" href="{{ route('rooms.index') }}">Rooms</a></li>
             <li class="nav-item"><a class="nav-link" href="{{ route('room-categories.index') }}">Room Categories</a></li>
