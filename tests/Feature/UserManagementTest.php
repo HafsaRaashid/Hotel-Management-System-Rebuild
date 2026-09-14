@@ -171,4 +171,44 @@ class UserManagementTest extends TestCase
 
         $this->assertDatabaseHas('users', ['id' => $target->id]);
     }
+
+    public function test_store_without_csrf_token_is_rejected_before_handler_runs(): void
+    {
+        $this->app['env'] = 'production';
+
+        $this->post(route('users.store'), [
+            'name' => 'No Token',
+            'username' => 'notoken',
+            'password' => 'password123',
+            'type' => User::TYPE_STAFF,
+        ])->assertStatus(419);
+
+        $this->assertDatabaseMissing('users', ['username' => 'notoken']);
+    }
+
+    public function test_update_without_csrf_token_is_rejected_before_handler_runs(): void
+    {
+        $this->app['env'] = 'production';
+        $user = $this->makeStaff();
+
+        $this->put(route('users.update', $user), [
+            'name' => 'Should Not Apply',
+            'username' => $user->username,
+            'password' => '',
+            'type' => User::TYPE_STAFF,
+        ])->assertStatus(419);
+
+        $user->refresh();
+        $this->assertSame('Staff Member', $user->name);
+    }
+
+    public function test_destroy_without_csrf_token_is_rejected_before_handler_runs(): void
+    {
+        $this->app['env'] = 'production';
+        $user = $this->makeStaff();
+
+        $this->delete(route('users.destroy', $user))->assertStatus(419);
+
+        $this->assertDatabaseHas('users', ['id' => $user->id]);
+    }
 }
