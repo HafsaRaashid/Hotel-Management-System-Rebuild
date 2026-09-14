@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\RoomCategoryController;
+use App\Http\Controllers\RoomController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,3 +32,11 @@ Route::view('/', 'shell')->name('shell');
 | not yet built); see .specclaw/changes/002-customer-management/design.md.
 */
 Route::resource('customers', CustomerController::class)->except(['show']);
+
+/*
+| MOD-003 - Room & Rate Management (BL-002/BL-003/BL-005). No `destroy` on
+| rooms - BL-004 (Room Delete) is held out of this change; see
+| .specclaw/changes/003-room-rate-management/spec.md.
+*/
+Route::resource('room-categories', RoomCategoryController::class);
+Route::resource('rooms', RoomController::class)->except(['show', 'destroy']);
