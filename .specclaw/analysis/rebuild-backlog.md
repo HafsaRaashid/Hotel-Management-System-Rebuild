@@ -789,6 +789,9 @@ _Depends on: MOD-002, MOD-003, MOD-004, MOD-005. module dependency rank undefine
 **Verification:** NO BASELINE DATA — baseline has been run, but no scenario in scenarios.md cites this item's rules
 **UI fidelity:** ⚠ UI GROUNDING MISSING — THEME-ONLY decided (SQ-013) but these artifacts are absent: .specclaw/ui/ui-inventory.md, .specclaw/ui/design-tokens.json, .specclaw/ui/screens/, .specclaw/ui/ui-manifest.json — run /specclaw:bf-ui
 
+**Status notes (human-added):**
+BUILT: change '008-dashboard-reporting', verify-report.md verdict PASS (10/10 acceptance criteria) 2026-09-14, merged to `main`. All nine legacy `admin/counters/*.php` counts/sums implemented (Total Bookings, Checked In, Checked Out, Total Payment, Available Rooms, Total Rooms, Total Room Categories, Total Customers, Total Users). Note on the declared `Depends on: BL-012` dependency: resolved as data-only, not a bypass — Total Users reads the real `users` table/model (built in change 007-admin-authentication) via a plain `User::count()`, nothing faked. BL-012 itself (the User List *screen*) remains unbuilt; this item does not implement any part of MOD-002.
+
 
 
 ## Deferred

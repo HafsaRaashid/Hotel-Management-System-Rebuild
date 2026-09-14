@@ -1,11 +1,12 @@
 {
   "change": "008-dashboard-reporting",
-  "phase": "build",
+  "phase": "verify",
   "branch": "specclaw/008-dashboard-reporting",
   "phases": {
     "spec": {"status":"done","at":"2026-09-14T09:59:20Z"},
     "design": {"status":"done","at":"2026-09-14T09:59:41Z"},
     "tasks": {"status":"done","at":"2026-09-14T10:00:03Z"},
-    "build": {"status":"failed","at":"2026-09-14T10:05:53Z","tasks":{"done":2,"total":2,"failed":0}}
+    "build": {"status":"failed","at":"2026-09-14T10:05:53Z","tasks":{"done":2,"total":2,"failed":0}},
+    "verify": {"status":"passed","at":"2026-09-14T10:19:31Z","verdict":"PASS"}
   }
 }

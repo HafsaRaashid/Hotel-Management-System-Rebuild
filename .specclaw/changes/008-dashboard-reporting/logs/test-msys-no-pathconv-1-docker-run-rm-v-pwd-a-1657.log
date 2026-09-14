@@ -1,0 +1,119 @@
+
+   PASS  Tests\Unit\ExampleTest
+  ✓ that true is true                                                    0.13s  
+
+   PASS  Tests\Feature\AdminAuthenticationTest
+  ✓ login with blank fields is rejected                                  8.12s  
+  ✓ login with correct credentials succeeds                              0.74s  
+  ✓ login with wrong password is rejected                                0.15s  
+  ✓ login with wrong case username is rejected                           0.13s  
+  ✓ logout ends the session                                              0.22s  
+  ✓ every admin route redirects to login when unauthenticated            0.21s  
+  ✓ every admin route answers when authenticated                         0.71s  
+  ✓ public routes remain reachable without authentication                0.57s  
+  ✓ admin page shows links to every admin screen                         0.30s  
+  ✓ login without csrf token is rejected                                 0.32s  
+
+   PASS  Tests\Feature\BookingIntakeTest
+  ✓ submitting creates booking with unique ref no                        0.54s  
+  ✓ new phone creates a customer and links it                            0.15s  
+  ✓ existing phone reuses customer without duplicating                   0.15s  
+  ✓ nonexistent category id is rejected                                  0.16s  
+  ✓ store without csrf token is rejected                                 0.24s  
+
+   PASS  Tests\Feature\CsrfProtectionTest
+  ✓ post without token is rejected before handler runs                   0.26s  
+  ✓ post with invalid token is rejected before handler runs              0.23s  
+  ✓ post with valid token reaches handler                                0.16s  
+
+   PASS  Tests\Feature\CustomerManagementTest
+  ✓ list shows all customer fields                                       0.22s  
+  ✓ create assigns unique customer ids across many creates               0.44s  
+  ✓ create skips insert when phone already exists                        0.15s  
+  ✓ create rejects invalid phone format                                  0.17s  
+  ✓ create accepts valid phone                                           0.14s  
+  ✓ edit updates fields without changing customer id                     0.15s  
+  ✓ delete removes unreferenced customer                                 0.16s  
+  ✓ delete rejects customer referenced by active booking                 0.14s  
+  ✓ delete allows customer referenced only by checked out or cancelled…  0.15s  
+  ✓ store without csrf token is rejected before handler runs             0.19s  
+  ✓ destroy without csrf token is rejected before handler runs           0.20s  
+
+   PASS  Tests\Feature\DashboardTest
+  ✓ dashboard redirects to login when unauthenticated                    0.16s  
+  ✓ dashboard answers when authenticated and shows all nine labels       0.21s  
+  ✓ total bookings counts every status                                   0.21s  
+  ✓ checked in and checked out counts exclude booked and cancelled       0.35s  
+  ✓ total payment sums only checked out bookings                         0.26s  
+  ✓ available and total rooms                                            0.22s  
+  ✓ plain counts for categories customers and users                      0.21s  
+  ✓ fresh install renders zero counters not an error                     0.21s  
+  ✓ login redirects to dashboard not customers index                     0.14s  
+  ✓ admin nav links to dashboard on an existing screen                   0.21s  
+  ✓ dashboard performs no writes                                         0.21s  
+
+   PASS  Tests\Feature\HealthCheckTest
+  ✓ the health check endpoint answers                                    0.16s  
+
+   PASS  Tests\Feature\MarketingSiteTest
+  ✓ home page shows live category pricing                                0.26s  
+  ✓ room details page shows live category pricing                        0.22s  
+  ✓ home page reflects a price change                                    0.19s  
+  ✓ services page answers                                                0.18s  
+  ✓ food page answers                                                    0.18s  
+  ✓ all four pages show the nav links                                    0.31s  
+  ✓ book now link resolves to the booking form                           0.24s  
+
+   PASS  Tests\Feature\PendingBookingTest
+  ✓ pending list shows only status zero bookings                         0.25s  
+  ✓ cancel sets status to cancelled without deleting                     0.14s  
+  ✓ convert assigns matching category available room                     0.17s  
+  ✓ convert rejects wrong category room                                  0.17s  
+  ✓ convert rejects unavailable room                                     0.16s  
+  ✓ cancel without csrf token is rejected                                0.18s  
+  ✓ convert without csrf token is rejected                               0.27s  
+
+   PASS  Tests\Feature\RoomCategoryManagementTest
+  ✓ migration seeds exactly the three legacy categories                  0.16s  
+  ✓ create persists name and price                                       0.15s  
+  ✓ edit updates name and price                                          0.15s  
+  ✓ delete removes category                                              0.16s  
+  ✓ store without csrf token is rejected                                 0.19s  
+  ✓ update without csrf token is rejected                                0.19s  
+  ✓ destroy without csrf token is rejected                               0.18s  
+
+   PASS  Tests\Feature\RoomManagementTest
+  ✓ list shows room category and status                                  0.27s  
+  ✓ list filters by category                                             0.21s  
+  ✓ create persists room category and status                             0.15s  
+  ✓ create rejects nonexistent category id                               0.25s  
+  ✓ edit updates room category and status                                0.15s  
+  ✓ delete removes unreferenced room                                     0.14s  
+  ✓ delete rejects room referenced by active booking                     0.14s  
+  ✓ delete allows room referenced only by checked out or cancelled book… 0.15s  
+  ✓ destroy without csrf token is rejected                               0.18s  
+  ✓ store without csrf token is rejected                                 0.19s  
+  ✓ update without csrf token is rejected                                0.22s  
+
+   PASS  Tests\Feature\StayLifecycleTest
+  ✓ stay list shows only checked in and checked out                      0.30s  
+  ✓ checkout page computes days and amount due                           0.30s  
+  ✓ checkout on already checked out booking with null customer is rejec… 0.22s  
+  ✓ checkout show on non checked in booking redirects instead of render… 0.22s  
+  ✓ checkout rejects payment below amount due                            0.19s  
+  ✓ checkout succeeds and has all three effects                          0.17s  
+  ✓ edit date recomputes and persists days of stay                       0.25s  
+  ✓ view completed stay renders expected fields                          0.19s  
+  ✓ checkout without csrf token is rejected                              0.19s  
+  ✓ edit date without csrf token is rejected                             0.18s  
+  ✓ days of stay formula matches legacy                                  0.13s  
+
+   PASS  Tests\Feature\WalkInTest
+  ✓ available list shows only status zero rooms                          0.23s  
+  ✓ store creates checked in booking and occupies room                   0.16s  
+  ✓ store dedups customer by phone                                       0.17s  
+  ✓ store without csrf token is rejected                                 0.19s  
+
+  Tests:    89 passed (609 assertions)
+  Duration: 29.49s
+
