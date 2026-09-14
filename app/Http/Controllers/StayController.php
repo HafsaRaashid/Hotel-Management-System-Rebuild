@@ -92,4 +92,14 @@ class StayController extends Controller
 
         return redirect()->route('stays.index');
     }
+
+    /**
+     * BL-023. Read-only: room, category, price, ref_no, guest name/phone,
+     * dates, days, total amount - all already on a status=2 booking's row
+     * or its relations.
+     */
+    public function show(Booking $booking): View
+    {
+        return view('stays.show', ['booking' => $booking]);
+    }
 }

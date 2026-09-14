@@ -53,6 +53,7 @@ Route::get('/stays/{booking}/checkout', [StayController::class, 'showCheckout'])
 Route::post('/stays/{booking}/checkout', [StayController::class, 'checkout'])->name('stays.checkout');
 Route::get('/stays/{booking}/edit', [StayController::class, 'edit'])->name('stays.edit');
 Route::put('/stays/{booking}', [StayController::class, 'updateDate'])->name('stays.update');
+Route::get('/stays/{booking}', [StayController::class, 'show'])->name('stays.show');
 
 /*
 | MOD-005 - Customer Management (BL-006/BL-007/BL-008). No `/admin` prefix
