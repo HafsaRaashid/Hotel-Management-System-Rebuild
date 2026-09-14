@@ -6,6 +6,7 @@ use App\Models\Booking;
 use App\Models\Customer;
 use App\Models\Room;
 use App\Models\RoomCategory;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -16,6 +17,16 @@ use Tests\TestCase;
 class PendingBookingTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        // BL-011 (change 007-admin-authentication): every admin route now
+        // requires an authenticated session. Acts as the seeded admin user
+        // (see database/migrations/2026_09_14_000006_create_users_table.php).
+        $this->actingAs(User::first());
+    }
 
     private function makeCustomer(): Customer
     {
