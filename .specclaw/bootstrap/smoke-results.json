@@ -1,0 +1,83 @@
+{
+  "timeout_seconds": 300,
+  "results": [
+    {
+      "check": "api-build",
+      "result": "PASS",
+      "detail": "",
+      "log": ".specclaw/bootstrap/smoke/api-build.log",
+      "required": true,
+      "command": "composer install --no-interaction --prefer-dist"
+    },
+    {
+      "check": "api-start",
+      "result": "PASS",
+      "detail": "",
+      "log": ".specclaw/bootstrap/smoke/api-start.log",
+      "required": true,
+      "command": "php artisan serve --port=8000 & pid=$!; sleep 2; curl -sf http://127.0.0.1:8000/up; kill $pid"
+    },
+    {
+      "check": "db-connect",
+      "result": "PASS",
+      "detail": "",
+      "log": ".specclaw/bootstrap/smoke/db-connect.log",
+      "required": true,
+      "command": "php artisan db:show"
+    },
+    {
+      "check": "migrations-infra",
+      "result": "PASS",
+      "detail": "",
+      "log": ".specclaw/bootstrap/smoke/migrations-infra.log",
+      "required": true,
+      "command": "php artisan migrate --force"
+    },
+    {
+      "check": "test-backend",
+      "result": "PASS",
+      "detail": "",
+      "log": ".specclaw/bootstrap/smoke/test-backend.log",
+      "required": true,
+      "command": "php artisan test"
+    },
+    {
+      "check": "frontend-build",
+      "result": "SKIPPED",
+      "detail": "SQ-006 decided no separate frontend build - Bootstrap is CDN-loaded directly in resources/views/layouts/app.blade.php, nothing to compile.",
+      "log": ".specclaw/bootstrap/smoke/frontend-build.log",
+      "required": false,
+      "command": null
+    },
+    {
+      "check": "frontend-start",
+      "result": "SKIPPED",
+      "detail": "No separate frontend process exists; the same Laravel process serves Blade views (see api-start).",
+      "log": ".specclaw/bootstrap/smoke/frontend-start.log",
+      "required": false,
+      "command": null
+    },
+    {
+      "check": "test-frontend",
+      "result": "SKIPPED",
+      "detail": "No separate frontend test runner exists - see the test-frontend pillar's reason.",
+      "log": ".specclaw/bootstrap/smoke/test-frontend.log",
+      "required": false,
+      "command": null
+    },
+    {
+      "check": "frontend-to-api",
+      "result": "SKIPPED",
+      "detail": "No frontend/API boundary exists (api-client pillar is absent-by-decision) - there is nothing to prove connects.",
+      "log": ".specclaw/bootstrap/smoke/frontend-to-api.log",
+      "required": false,
+      "command": null
+    }
+  ],
+  "summary": {
+    "total": 9,
+    "passed": 5,
+    "failed": 0,
+    "skipped": 4
+  }
+}

@@ -1,0 +1,26 @@
+{
+    "scenario_id": "GM-027",
+    "captured_at": "2026-09-11T05:51:45Z",
+    "anchor_date": "2026-09-11",
+    "legacy_commit_sha": "c77a6e7fdb549db426c1cb410bc32c31dd236045",
+    "runtime_version": "8.1.34",
+    "normalized_fields": [],
+    "input": {
+        "post": {
+            "id": "1"
+        },
+        "session": {
+            "login_type": 2
+        }
+    },
+    "output": {
+        "outcome": "REJECTED",
+        "error_code": "DELETE_STATEMENT_PARAM_COUNT_MISMATCH",
+        "threw": true,
+        "target_user_deleted": false,
+        "ExceptionType": "ArgumentCountError",
+        "InnerExceptionType": null,
+        "ExceptionMessage": "The number of variables must match the number of parameters in the prepared statement",
+        "InnerExceptionMessage": null
+    }
+}

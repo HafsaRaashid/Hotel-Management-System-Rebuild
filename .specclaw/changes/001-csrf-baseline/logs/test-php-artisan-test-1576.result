@@ -1,0 +1,7 @@
+exit=127
+duration_s=1
+log=.specclaw/changes/001-csrf-baseline/logs/test-php-artisan-test-1576.log
+head=c38fecd274264ac2d3fe233dd34484d5d22b5699
+dirty=true
+cmd=php artisan test
+interrupted=false

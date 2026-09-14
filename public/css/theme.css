@@ -1,0 +1,25 @@
+/*
+ * Theme mechanism (theme-plumbing pillar, SQ-013 THEME-ONLY).
+ *
+ * SQ-013 decided THEME-ONLY: keep the legacy colour palette/branding
+ * tokens, reinterpret layout for the target platform. However, the token
+ * source artifacts that would supply real values - .specclaw/ui/design-
+ * tokens.json and .specclaw/ui/ui-inventory.md - do not exist in this repo
+ * (the bf-ui workstream has never run against the legacy app here).
+ *
+ * This file therefore declares the *mechanism* only: a CSS custom-property
+ * structure a future screen-bearing item can populate, scoped to `global`
+ * TK- groups only when they exist. No token value is imported. Run
+ * /specclaw:bf-ui against the legacy repo and re-run this workstream's
+ * token step to populate real values - see bootstrap-plan.md's
+ * "Token-plumbing line" section.
+ */
+
+:root {
+    /* --color-primary: ; */
+    /* --color-secondary: ; */
+    /* --color-accent: ; */
+    /* --font-family-base: ; */
+
+    /* Intentionally empty: no TK-### group is available to import. */
+}

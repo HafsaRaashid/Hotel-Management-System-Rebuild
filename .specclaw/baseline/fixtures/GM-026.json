@@ -1,0 +1,26 @@
+{
+    "scenario_id": "GM-026",
+    "captured_at": "2026-09-11T05:51:45Z",
+    "anchor_date": "2026-09-11",
+    "legacy_commit_sha": "c77a6e7fdb549db426c1cb410bc32c31dd236045",
+    "runtime_version": "8.1.34",
+    "normalized_fields": [],
+    "input": {
+        "post": {
+            "id": "",
+            "name": "New Staff",
+            "username": "newstaff",
+            "password": "pass1234",
+            "type": "2"
+        },
+        "session": {
+            "login_type": 2
+        }
+    },
+    "output": {
+        "outcome": "OK",
+        "error_code": null,
+        "threw": false,
+        "user_created": true
+    }
+}

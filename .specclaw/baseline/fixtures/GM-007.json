@@ -1,0 +1,37 @@
+{
+    "scenario_id": "GM-007",
+    "captured_at": "2026-09-11T05:51:43Z",
+    "anchor_date": "2026-09-11",
+    "legacy_commit_sha": "c77a6e7fdb549db426c1cb410bc32c31dd236045",
+    "runtime_version": "8.1.34",
+    "normalized_fields": [
+        "final_ref_no"
+    ],
+    "input": {
+        "post": {
+            "name": "Test Guest",
+            "mail": "guest@example.com",
+            "phone": "918300002",
+            "room_type": "Single Room",
+            "adult": "2",
+            "children": "0",
+            "datein": "2026-02-01",
+            "dateout": "2026-02-04",
+            "days_of_stay": "3",
+            "message": "None"
+        },
+        "seeded_ref_no": 500000001,
+        "rand_sequence": [
+            500000001,
+            600000002
+        ]
+    },
+    "output": {
+        "outcome": "OK",
+        "error_code": null,
+        "threw": false,
+        "retry_occurred": true,
+        "final_ref_no_distinct_from_seeded": true,
+        "final_ref_no": 600000002
+    }
+}

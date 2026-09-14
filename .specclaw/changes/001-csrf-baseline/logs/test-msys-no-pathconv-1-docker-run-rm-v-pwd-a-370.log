@@ -1,0 +1,16 @@
+
+   PASS  Tests\Unit\ExampleTest
+  ✓ that true is true                                                    0.14s  
+
+   PASS  Tests\Feature\CsrfProtectionTest
+  ✓ post without token is rejected before handler runs                   6.29s  
+  ✓ post with invalid token is rejected before handler runs              0.19s  
+  ✓ post with valid token reaches handler                                0.20s  
+
+   PASS  Tests\Feature\HealthCheckTest
+  ✓ the health check endpoint answers                                    0.23s  
+  ✓ the shell route renders                                              0.22s  
+
+  Tests:    6 passed (11 assertions)
+  Duration: 9.28s
+

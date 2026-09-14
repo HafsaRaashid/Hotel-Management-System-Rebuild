@@ -1,0 +1,1 @@
+SKIPPED: No separate frontend process exists; the same Laravel process serves Blade views (see api-start).

@@ -1,0 +1,7 @@
+exit=127
+duration_s=2
+log=.specclaw/changes/001-csrf-baseline/logs/lint-vendor-bin-pint-test-1598.log
+head=c38fecd274264ac2d3fe233dd34484d5d22b5699
+dirty=true
+cmd=vendor/bin/pint --test
+interrupted=false

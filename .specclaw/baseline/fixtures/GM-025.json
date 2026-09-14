@@ -1,0 +1,25 @@
+{
+    "scenario_id": "GM-025",
+    "captured_at": "2026-09-11T05:51:43Z",
+    "anchor_date": "2026-09-11",
+    "legacy_commit_sha": "c77a6e7fdb549db426c1cb410bc32c31dd236045",
+    "runtime_version": "8.1.34",
+    "normalized_fields": [],
+    "input": {
+        "post": {
+            "id": "1",
+            "room": "Double-201",
+            "phone": "918388001",
+            "payment": "297"
+        }
+    },
+    "output": {
+        "outcome": "OK",
+        "error_code": null,
+        "threw": false,
+        "matched_room_id": 20,
+        "matched_room_status": 0,
+        "booking_own_room_id": 10,
+        "booking_own_room_status": 1
+    }
+}
