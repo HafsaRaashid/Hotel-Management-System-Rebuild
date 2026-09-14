@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\MarketingController;
 use App\Http\Controllers\RoomCategoryController;
 use App\Http\Controllers\RoomController;
 use Illuminate\Support\Facades\Route;
@@ -10,21 +11,26 @@ use Illuminate\Support\Facades\Route;
 | Web Routes
 |--------------------------------------------------------------------------
 |
-| Foundation-only (frontend-routing pillar). This file intentionally
-| registers no capability route - no public marketing page (MOD-006), no
-| admin screen (MOD-001..MOD-005, MOD-007), and no auth route. The single
-| route below proves the shell renders end to end through the layout;
-| every backlog item replaces or extends it, one item at a time.
-|
 | The public/admin route-group split implied by the target architecture's
 | container view is deliberately not pre-empted here: which routes get
 | grouped under which middleware/prefix is part of a future backlog item's
-| own design (the whitelisted front-controller replacement), not this
-| scaffold's.
+| own design (the whitelisted front-controller replacement, BL-011, not
+| yet built), not this file's. Each block below is one backlog item's own
+| routes, added as that item was built.
 |
 */
 
-Route::view('/', 'shell')->name('shell');
+/*
+| MOD-006 - Public Marketing Site (BL-009). Replaces the foundation's shell
+| placeholder at '/' - see resources/views/marketing/home.blade.php and
+| .specclaw/changes/004-public-marketing-site/design.md. '/rooms-overview',
+| not '/room' or '/rooms', to avoid colliding with the admin 'rooms.*'
+| resource below.
+*/
+Route::get('/', [MarketingController::class, 'home'])->name('marketing.home');
+Route::get('/rooms-overview', [MarketingController::class, 'room'])->name('marketing.room');
+Route::get('/services', [MarketingController::class, 'services'])->name('marketing.services');
+Route::get('/food', [MarketingController::class, 'food'])->name('marketing.food');
 
 /*
 | MOD-005 - Customer Management (BL-006/BL-007/BL-008). No `/admin` prefix
