@@ -348,6 +348,9 @@ _Depends on: none. module dependency rank undefined — module-map.md describes 
 **Verification:** NO BASELINE DATA — baseline has been run, but no scenario in scenarios.md cites this item's rules
 **UI fidelity:** ⚠ UI GROUNDING MISSING — THEME-ONLY decided (SQ-013) but these artifacts are absent: .specclaw/ui/ui-inventory.md, .specclaw/ui/design-tokens.json, .specclaw/ui/screens/, .specclaw/ui/ui-manifest.json — run /specclaw:bf-ui
 
+**Status notes (human-added):**
+BUILT: change `002-customer-management`, verify-report.md verdict PASS (8/8 acceptance criteria across BL-006/007/008) 2026-09-14, merged to `main`. Functional-only (no UI fidelity — still gated above).
+
 ---
 
 ### BL-007 — Customer Create/Edit
@@ -368,6 +371,9 @@ _Depends on: none. module dependency rank undefined — module-map.md describes 
 **Verification:** VERIFIABLE — fixtures: GM-008 (c77a6e7fdb549db426c1cb410bc32c31dd236045), GM-009 (c77a6e7fdb549db426c1cb410bc32c31dd236045), GM-010 (c77a6e7fdb549db426c1cb410bc32c31dd236045), GM-011 (c77a6e7fdb549db426c1cb410bc32c31dd236045), GM-033 (c77a6e7fdb549db426c1cb410bc32c31dd236045)
 **UI fidelity:** ⚠ UI GROUNDING MISSING — THEME-ONLY decided (SQ-013) but these artifacts are absent: .specclaw/ui/ui-inventory.md, .specclaw/ui/design-tokens.json, .specclaw/ui/screens/, .specclaw/ui/ui-manifest.json — run /specclaw:bf-ui
 
+**Status notes (human-added):**
+BUILT: change `002-customer-management`, verify-report.md verdict PASS 2026-09-14, merged to `main`. DR-004/DR-005/CQ-012 implemented and tested; golden-master fixtures (GM-008/009/010/011/033) not yet replayed against the rebuild — `/specclaw:bf-replay` has not run in this project.
+
 ---
 
 ### BL-008 — Customer Delete
@@ -386,6 +392,7 @@ _Depends on: none. module dependency rank undefined — module-map.md describes 
 **Verification:** NO BASELINE DATA — baseline has been run, but no scenario in scenarios.md cites this item's rules
 
 **Status notes (human-added):**
+BUILT: change `002-customer-management`, verify-report.md verdict PASS 2026-09-14, merged to `main`. Partial — see next line.
 ⚠ PARTIALLY BUILT (recorded in prose, not via IS-### — see change `002-customer-management`'s spec.md for why): CQ-021's delete fix is implemented and built; CQ-024's referential-integrity check against `booking` is deferred — no `booking` table exists yet (MOD-004 unbuilt). Blocked until MOD-004 creates the `booking` table. `specclaw-bf-rebuild-collect split-append` could not be used because this item cites no `DR-###` rule to partition against.
 
 ## MOD-006 — Public Marketing Site
