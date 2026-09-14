@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MarketingController;
 use App\Http\Controllers\PendingBookingController;
 use App\Http\Controllers\RoomCategoryController;
@@ -59,6 +60,9 @@ Route::post('/book', [BookingController::class, 'store'])->name('booking.store')
 | mechanism anywhere in this file to whitelist.
 */
 Route::middleware('auth')->group(function () {
+    // MOD-007 - Admin Dashboard & Reporting (BL-024). Login lands here.
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
     // MOD-004 admin routes (BL-016/BL-017/BL-018/BL-019/BL-020/BL-021/BL-022/BL-023).
     Route::get('/walk-in', [WalkInController::class, 'available'])->name('walk-in.available');
     Route::get('/walk-in/create', [WalkInController::class, 'create'])->name('walk-in.create');
