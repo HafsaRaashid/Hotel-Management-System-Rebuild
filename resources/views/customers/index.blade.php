@@ -7,6 +7,8 @@
 @section('title', 'Customers')
 
 @section('content')
+    @include('partials.admin-nav')
+
     <main class="container py-5">
         <h1>Customers</h1>
 

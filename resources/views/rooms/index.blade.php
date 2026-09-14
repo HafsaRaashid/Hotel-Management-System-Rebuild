@@ -8,6 +8,8 @@
 @section('title', 'Rooms')
 
 @section('content')
+    @include('partials.admin-nav')
+
     <main class="container py-5">
         <h1>Rooms</h1>
 
