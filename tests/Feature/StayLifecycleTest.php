@@ -78,6 +78,41 @@ class StayLifecycleTest extends TestCase
         $response->assertSee('198');
     }
 
+    /**
+     * Regression for change 006-delete-referential-integrity's verify
+     * finding: before that change, bookings.customer_id's FK was RESTRICT,
+     * so a booking's customer could never be deleted and $booking->customer
+     * was always safe inside checkout(). That change relaxed the FK to
+     * nullOnDelete() (so a customer referenced only by a checked-out/
+     * cancelled booking can be deleted, per its own AC-6) - which means a
+     * checkout() reached a second time on a booking whose customer_id is
+     * now null (a replay, a double submit, a direct POST) must be rejected
+     * before touching $booking->customer, not crash on a null dereference.
+     */
+    public function test_checkout_on_already_checked_out_booking_with_null_customer_is_rejected_not_crashed(): void
+    {
+        $booking = $this->makeCheckedInBooking([
+            'status' => Booking::STATUS_CHECKED_OUT,
+            'customer_id' => null,
+        ]);
+
+        $response = $this->post(route('stays.checkout', $booking), ['payment' => 198]);
+
+        $response->assertRedirect(route('stays.index'));
+        $response->assertSessionHas('error');
+
+        $booking->refresh();
+        $this->assertSame(Booking::STATUS_CHECKED_OUT, $booking->status);
+    }
+
+    public function test_checkout_show_on_non_checked_in_booking_redirects_instead_of_rendering(): void
+    {
+        $booking = $this->makeCheckedInBooking(['status' => Booking::STATUS_CANCELLED, 'room_id' => null]);
+
+        $this->get(route('stays.checkout.show', $booking))
+            ->assertRedirect(route('stays.index'));
+    }
+
     public function test_checkout_rejects_payment_below_amount_due(): void
     {
         $booking = $this->makeCheckedInBooking();

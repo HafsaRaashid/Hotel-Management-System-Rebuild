@@ -24,9 +24,21 @@ class StayController extends Controller
      * BL-021. DR-009 (days of stay) and DR-010 (amount due = price x days)
      * computed here for display - checkout() below recomputes them itself
      * rather than trusting anything the client submits.
+     *
+     * Guarded to status=checked_in only (change 006's finding): before that
+     * change, bookings.customer_id's FK was RESTRICT, so a booking's
+     * customer could never be deleted and $booking->customer was always
+     * safe. Now that a customer referenced only by a checked-out/cancelled
+     * booking CAN be deleted (customer_id -> null on delete), reaching this
+     * action on such a booking again (a replay, a double submit, a direct
+     * POST) must be rejected before touching $booking->customer, not after.
      */
-    public function showCheckout(Booking $booking): View
+    public function showCheckout(Booking $booking): View|RedirectResponse
     {
+        if ($booking->status !== Booking::STATUS_CHECKED_IN) {
+            return redirect()->route('stays.index')->with('error', 'This booking is not currently checked in.');
+        }
+
         $days = Booking::computeDaysOfStay($booking->datein, $booking->dateout);
         $amountDue = $booking->category->price * $days;
 
@@ -42,10 +54,15 @@ class StayController extends Controller
      * from the client) and payment must be >= it. DR-011: closes the
      * booking, bills the customer via the customer_id FK (CQ-011, not
      * phone), and frees the room via its id (CQ-023, not name text) - one
-     * composite write.
+     * composite write. Guarded to status=checked_in only - see
+     * showCheckout()'s docblock for why.
      */
     public function checkout(Request $request, Booking $booking): RedirectResponse
     {
+        if ($booking->status !== Booking::STATUS_CHECKED_IN) {
+            return redirect()->route('stays.index')->with('error', 'This booking is not currently checked in.');
+        }
+
         $days = Booking::computeDaysOfStay($booking->datein, $booking->dateout);
         $amountDue = $booking->category->price * $days;
 

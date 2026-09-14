@@ -10,6 +10,10 @@
     <main class="container py-5">
         <h1>Stays</h1>
 
+        @if (session('error'))
+            <div class="alert alert-warning">{{ session('error') }}</div>
+        @endif
+
         <table class="table">
             <thead>
                 <tr>
