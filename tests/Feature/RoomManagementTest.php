@@ -2,6 +2,8 @@
 
 namespace Tests\Feature;
 
+use App\Models\Booking;
+use App\Models\Customer;
 use App\Models\Room;
 use App\Models\RoomCategory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -91,6 +93,78 @@ class RoomManagementTest extends TestCase
         $this->assertSame('Single_101B', $room->room);
         $this->assertSame($newCategory->id, $room->category_id);
         $this->assertSame(1, $room->status);
+    }
+
+    private function makeBookingReferencing(Room $room, int $status): Booking
+    {
+        $customer = Customer::create([
+            'customer_id' => Customer::generateUniqueCustomerId(),
+            'name' => 'Jane Doe',
+            'mail' => 'jane@example.com',
+            'phone' => (string) random_int(1000000, 9999999),
+            'address' => '1 Test St',
+            'charges' => 0,
+        ]);
+
+        return Booking::create([
+            'ref_no' => Booking::generateUniqueRefNo(),
+            'customer_id' => $customer->id,
+            'name' => $customer->name,
+            'mail' => $customer->mail,
+            'phone' => $customer->phone,
+            'category_id' => $room->category_id,
+            'room_id' => $room->id,
+            'adult' => 1,
+            'children' => 0,
+            'datein' => '2026-10-01',
+            'dateout' => '2026-10-03',
+            'days_of_stay' => 2,
+            'status' => $status,
+        ]);
+    }
+
+    public function test_delete_removes_unreferenced_room(): void
+    {
+        $category = RoomCategory::first();
+        $room = Room::create(['room' => 'Single_101', 'category_id' => $category->id, 'status' => 0]);
+
+        $this->delete(route('rooms.destroy', $room))->assertRedirect(route('rooms.index'));
+
+        $this->assertDatabaseMissing('rooms', ['id' => $room->id]);
+    }
+
+    public function test_delete_rejects_room_referenced_by_active_booking(): void
+    {
+        $category = RoomCategory::first();
+        $room = Room::create(['room' => 'Single_101', 'category_id' => $category->id, 'status' => 1]);
+        $this->makeBookingReferencing($room, Booking::STATUS_CHECKED_IN);
+
+        $this->delete(route('rooms.destroy', $room))->assertRedirect(route('rooms.index'));
+
+        $this->assertDatabaseHas('rooms', ['id' => $room->id]);
+    }
+
+    public function test_delete_allows_room_referenced_only_by_checked_out_or_cancelled_booking(): void
+    {
+        $category = RoomCategory::first();
+        $room = Room::create(['room' => 'Single_101', 'category_id' => $category->id, 'status' => 0]);
+        $this->makeBookingReferencing($room, Booking::STATUS_CHECKED_OUT);
+
+        $this->delete(route('rooms.destroy', $room))->assertRedirect(route('rooms.index'));
+
+        $this->assertDatabaseMissing('rooms', ['id' => $room->id]);
+    }
+
+    public function test_destroy_without_csrf_token_is_rejected(): void
+    {
+        $this->app['env'] = 'production';
+
+        $category = RoomCategory::first();
+        $room = Room::create(['room' => 'Single_101', 'category_id' => $category->id, 'status' => 0]);
+
+        $this->delete(route('rooms.destroy', $room))->assertStatus(419);
+
+        $this->assertDatabaseHas('rooms', ['id' => $room->id]);
     }
 
     public function test_store_without_csrf_token_is_rejected(): void
