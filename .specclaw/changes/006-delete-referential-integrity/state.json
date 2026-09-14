@@ -1,0 +1,12 @@
+{
+  "change": "006-delete-referential-integrity",
+  "phase": "build",
+  "branch": "specclaw/006-delete-referential-integrity",
+  "phases": {
+    "proposal": {"status":"approved","at":"2026-09-14T09:16:04Z"},
+    "spec": {"status":"done","at":"2026-09-14T09:16:41Z"},
+    "design": {"status":"done","at":"2026-09-14T09:17:01Z"},
+    "tasks": {"status":"done","at":"2026-09-14T09:17:21Z"},
+    "build": {"status":"failed","at":"2026-09-14T09:25:31Z","tasks":{"done":4,"total":4,"failed":0}}
+  }
+}

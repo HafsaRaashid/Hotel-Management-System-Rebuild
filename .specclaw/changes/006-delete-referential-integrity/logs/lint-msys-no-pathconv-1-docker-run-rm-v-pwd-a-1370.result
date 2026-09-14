@@ -1,0 +1,7 @@
+exit=1
+duration_s=8
+log=.specclaw/changes/006-delete-referential-integrity/logs/lint-msys-no-pathconv-1-docker-run-rm-v-pwd-a-1370.log
+head=0258c6142e39b68ef7af639fd7a5acb38bfe1a35
+dirty=true
+cmd=MSYS_NO_PATHCONV=1 docker run --rm -v "$(pwd):/app" -w /app php:8.2-cli php vendor/bin/pint --test
+interrupted=false
