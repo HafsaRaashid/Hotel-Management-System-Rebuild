@@ -49,7 +49,7 @@ Two waves. Wave 1 builds the data layer (migration + model) everything else need
   - Depends: T3, T4
   - Notes: `Route::resource('customers', CustomerController::class)->except(['show']);`. No `/admin` prefix (design.md's Technical Approach — that's BL-011's job, not built yet).
 
-- [ ] `T6` — Feature tests
+- [x] `T6` — Feature tests
   - Files: `tests/Feature/CustomerManagementTest.php` (create)
   - Estimate: medium
   - Kind: test
