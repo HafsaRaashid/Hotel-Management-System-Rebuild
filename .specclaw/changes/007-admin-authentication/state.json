@@ -1,0 +1,12 @@
+{
+  "change": "007-admin-authentication",
+  "phase": "build",
+  "branch": "specclaw/007-admin-authentication",
+  "phases": {
+    "proposal": {"status":"approved","at":"2026-09-14T09:39:09Z"},
+    "spec": {"status":"done","at":"2026-09-14T09:39:45Z"},
+    "design": {"status":"done","at":"2026-09-14T09:40:49Z"},
+    "tasks": {"status":"done","at":"2026-09-14T09:41:20Z"},
+    "build": {"status":"failed","at":"2026-09-14T09:51:22Z","tasks":{"done":5,"total":5,"failed":0}}
+  }
+}
