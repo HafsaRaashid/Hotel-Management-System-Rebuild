@@ -692,6 +692,9 @@ BUILT: change `001-csrf-baseline`, verify-report.md verdict PASS (4/4 acceptance
 **Verification:** VERIFIABLE — fixtures: GM-001 (c77a6e7fdb549db426c1cb410bc32c31dd236045), GM-002 (c77a6e7fdb549db426c1cb410bc32c31dd236045), GM-003 (c77a6e7fdb549db426c1cb410bc32c31dd236045), GM-004 (c77a6e7fdb549db426c1cb410bc32c31dd236045), GM-005 (c77a6e7fdb549db426c1cb410bc32c31dd236045), GM-031 (c77a6e7fdb549db426c1cb410bc32c31dd236045), GM-032 (c77a6e7fdb549db426c1cb410bc32c31dd236045)
 **UI fidelity:** ⚠ UI GROUNDING MISSING — THEME-ONLY decided (SQ-013) but these artifacts are absent: .specclaw/ui/ui-inventory.md, .specclaw/ui/design-tokens.json, .specclaw/ui/screens/, .specclaw/ui/ui-manifest.json — run /specclaw:bf-ui
 
+**Status notes (human-added):**
+BUILT: change '007-admin-authentication', verify-report.md verdict PASS (2026-09-14). Delivers CQ-002 (password_hash/password_verify), CQ-019 (unique username constraint), CQ-020 (case-sensitive exact-match recheck) and DR-001 blank-field rejection. Seeded one dev-only admin user (username `admin`, password `password123`, documented as a placeholder, not a security decision).
+
 ---
 
 ### BL-011 — Admin Front Controller Routing & Session Access Gate
@@ -707,6 +710,9 @@ BUILT: change `001-csrf-baseline`, verify-report.md verdict PASS (4/4 acceptance
 - No `GM-NNN` scenario in `scenarios.md` models the front-controller routing/whitelist behavior or the sidebar's session-guard/nav-visibility rendering directly — the DR-012-tagged scenarios (GM-026/027/028) exercise the *handler-side* bypass (see BL-013/BL-014), not this item's UI-visibility/routing concern. This item's acceptance rests on the architecture.md quotes above and new tests written against the rebuilt router; no baseline replay is possible for the routing behavior since `scenarios.md` never modeled it as a seam.
 **Gate:** CLEAR
 **Verification:** VERIFIABLE — fixtures: GM-026 (c77a6e7fdb549db426c1cb410bc32c31dd236045), GM-027 (c77a6e7fdb549db426c1cb410bc32c31dd236045), GM-028 (c77a6e7fdb549db426c1cb410bc32c31dd236045)
+
+**Status notes (human-added):**
+BUILT: change '007-admin-authentication', verify-report.md verdict PASS (2026-09-14). Delivers CQ-001 (routing whitelist — Laravel's router replaces the raw `include $page.'.php'` pattern entirely) and the session-guard gate, now enforced via an `auth` middleware group wrapping every admin route (customers, rooms, room-categories, bookings/pending, walk-in, stays). Note: this item owns only the nav-visibility half of DR-012 (the "Users" link is deliberately omitted from admin-nav.blade.php since MOD-002 is unbuilt); the handler-side server-enforcement half of DR-012 remains BL-013/BL-014's concern and is NOT implemented by this change.
 
 ## MOD-002 — User Account Management
 
