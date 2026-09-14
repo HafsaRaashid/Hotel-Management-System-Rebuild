@@ -1,0 +1,7 @@
+exit=1
+duration_s=102
+log=.specclaw/changes/004-public-marketing-site/logs/lint-msys-no-pathconv-1-docker-run-rm-v-pwd-a-360.log
+head=63c4526a46a1072ce38ec5ab6ea356d7468d7126
+dirty=true
+cmd=MSYS_NO_PATHCONV=1 docker run --rm -v "$(pwd):/app" -w /app php:8.2-cli php vendor/bin/pint --test
+interrupted=false
